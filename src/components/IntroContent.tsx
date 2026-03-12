@@ -11,9 +11,9 @@ type IntroContentProps = {
   onComplete: () => void;
 };
 
-export function IntroContent({onComplete}: IntroContentProps) {
+export function IntroContent({ onComplete }: IntroContentProps) {
   return (
-    <section className="border-(--border) px-5 py-16 md:px-12 md:py-24">
+    <section className="min-h-svh px-5 py-16 md:px-12 md:py-24">
       <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-16">
         <motion.div
           className="max-w-3xl transform-gpu will-change-transform"
@@ -45,31 +45,6 @@ export function IntroContent({onComplete}: IntroContentProps) {
             transition={{ ...heroTransition, delay: 0.24 }}
           >
             <IntroDescriptionSequence onComplete={onComplete} />
-          </motion.div>
-
-          <motion.div
-            className="mt-8 flex flex-wrap items-center gap-3 transform-gpu will-change-transform"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...heroTransition, delay: 0.32 }}
-          >
-            <motion.a
-              href="#projects"
-              className="rounded-full border border-(--accent-border) bg-(--accent) px-5 py-3 text-sm font-medium text-white transition-transform duration-200 hover:-translate-y-0.5"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              View Projects
-            </motion.a>
-
-            <motion.a
-              href="#about"
-              className="rounded-full border border-(--border) px-5 py-3 text-sm font-medium text-(--text-h) transition-colors duration-200 hover:bg-(--accent-bg)"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              About Me
-            </motion.a>
           </motion.div>
         </motion.div>
 

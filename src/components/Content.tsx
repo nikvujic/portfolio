@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import { SkillsChaos } from './SkillsChaos';
 import { AIBioGenerator } from './AIBioGenerator';
 import { ProjectsSection } from './ProjectsSection';
@@ -13,11 +15,16 @@ export function Content({ visible }: ContentProps) {
   }
 
   return (
-    <div className="flex flex-col">
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+      className="flex flex-col"
+    >
       <SkillsChaos />
       <AIBioGenerator />
       <ProjectsSection />
       <TechStackSection />
-    </div>
+    </motion.div>
   );
 }
