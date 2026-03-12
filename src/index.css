@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer base {
+  p {
+    margin: 0;
+  }
+}
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -86,10 +92,6 @@ h3 {
   font-family: var(--heading);
   font-weight: 500;
   color: var(--text-h);
-}
-
-p {
-  margin: 0;
 }
 
 code,
