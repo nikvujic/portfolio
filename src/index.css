@@ -54,7 +54,6 @@
   width: 1126px;
   max-width: 100%;
   margin: 0 auto;
-  text-align: center;
   border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
@@ -64,6 +63,28 @@
 
 body {
   margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+section {
+  padding: 72px 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 1024px) {
+  section {
+    padding: 48px 20px;
+  }
 }
 
 h1,
