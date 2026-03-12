@@ -1,4 +1,3 @@
-import './index.css';
 import { Hero } from './components/Hero';
 import { SkillsChaos } from './components/SkillsChaos';
 import { AIBioGenerator } from './components/AIBioGenerator';
@@ -7,7 +6,7 @@ import { TechStackSection } from './components/TechStackSection';
 
 function App() {
   return (
-    <main>
+    <main className="flex flex-col">
       <Hero />
       <SkillsChaos />
       <AIBioGenerator />
