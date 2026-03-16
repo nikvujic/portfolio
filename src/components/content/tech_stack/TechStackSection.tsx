@@ -1,13 +1,13 @@
-import { SectionTitle } from './SectionTitle';
-import { technologies } from '../data/technologies';
+import { SectionTitle } from '../../shared/SectionTitle';
+import { technologies } from '../../../data/technologies';
 
 export function TechStackSection() {
   return (
-    <section className="px-5 py-16 md:px-12 md:py-24">
+    <section id="technologies" className="px-5 py-16 md:px-12 md:py-24">
       <SectionTitle
         eyebrow="Tech"
         title="Technologies I use"
-        subtitle="Tools I’ve worked with in production and the stack I’m building with now."
+        subtitle="Tools I've worked with in production and the stack I'm building with now."
       />
 
       <div className="flex flex-wrap justify-center gap-3">

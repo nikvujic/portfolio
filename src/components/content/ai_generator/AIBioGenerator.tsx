@@ -1,8 +1,8 @@
-import { SectionTitle } from './SectionTitle';
+import { SectionTitle } from '../../shared/SectionTitle';
 
 export function AIBioGenerator() {
   return (
-    <section className="border-(--border) px-5 py-16 md:px-12 md:py-24">
+    <section id="ai-summary" className="border-(--border) px-5 py-16 md:px-12 md:py-24">
       <SectionTitle
         eyebrow="AI Summary"
         title="Generated profile description"

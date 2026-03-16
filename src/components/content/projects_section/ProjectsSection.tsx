@@ -1,6 +1,6 @@
-import { SectionTitle } from './SectionTitle';
+import { SectionTitle } from '../../shared/SectionTitle';
 import { ProjectCard } from './ProjectCard';
-import { projects } from '../data/projects';
+import { projects } from '../../../data/projects';
 
 export function ProjectsSection() {
   return (

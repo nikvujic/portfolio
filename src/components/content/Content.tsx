@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion';
 
-import { SkillsChaos } from './SkillsChaos';
-import { AIBioGenerator } from './AIBioGenerator';
-import { ProjectsSection } from './ProjectsSection';
-import { TechStackSection } from './TechStackSection';
+import { AIBioGenerator } from './ai_generator/AIBioGenerator';
+import { ProjectsSection } from './projects_section/ProjectsSection';
+import { TechStackSection } from './tech_stack/TechStackSection';
 
 type ContentProps = {
   visible: boolean;
@@ -21,9 +20,8 @@ export function Content({ visible }: ContentProps) {
       transition={{ duration: 0.8, ease: 'easeOut' }}
       className="flex flex-col"
     >
-      <SkillsChaos />
-      <AIBioGenerator />
       <ProjectsSection />
+      <AIBioGenerator />
       <TechStackSection />
     </motion.div>
   );
