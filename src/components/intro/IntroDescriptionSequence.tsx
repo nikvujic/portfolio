@@ -72,15 +72,15 @@ export function IntroDescriptionSequence({
       return MEDIUM_LIST_PAUSE_MS;
     }
 
-    if (count > 12 && count < 28) {
+    if (count > 12 && count < 21) {
       return QUICK_LIST_DELAY_MS;
     }
 
-    if (count >= 28 && count < 46) {
+    if (count >= 21 && count < 33) {
       return FAST_LIST_DELAY_MS;
     }
 
-    if (count >= 46) {
+    if (count >= 33) {
       return VERY_FAST_LIST_DELAY_MS;
     }
 

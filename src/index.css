@@ -78,9 +78,7 @@ body {
 }
 
 #root {
-  width: 70.375rem;
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
   min-height: 100svh;
   background: var(--bg);
 }

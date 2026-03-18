@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { FileText, Github, Linkedin, type LucideIcon } from 'lucide-react';
+import { ArrowRight, FileText, Github, Linkedin, type LucideIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import profileImage from '../../assets/images/profile.jpeg';
 import { IntroDescriptionSequence } from './IntroDescriptionSequence';
@@ -33,31 +33,37 @@ const revealTransition = {
 // ─── Nav / link data ──────────────────────────────────────────────────────────
 
 const introNavItems = [
-  { label: 'Projects', targetId: 'projects' },
-  { label: 'AI Summary', targetId: 'ai-summary' },
+  { label: 'Projects',     targetId: 'projects'     },
+  { label: 'AI Summary',   targetId: 'ai-summary'   },
   { label: 'Technologies', targetId: 'technologies' },
 ] as const;
 
-const introLinkItems = [
-  { label: 'GitHub',   href: 'https://github.com/nikvujic',             icon: Github   },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/nikvujic/',   icon: Linkedin },
-  { label: 'CV',       href: '/cv.pdf',                                 icon: FileText },
-] as const satisfies ReadonlyArray<{ label: string; href: string; icon: LucideIcon }>;
+type ExternalLinkItem  = { label: string; href: string;      icon: LucideIcon };
+type SectionLinkItem   = { label: string; sectionId: string; icon: LucideIcon };
+type IntroLinkItem     = ExternalLinkItem | SectionLinkItem;
+
+const introLinkItems: ReadonlyArray<IntroLinkItem> = [
+  { label: 'GitHub',   href: 'https://github.com/nikvujic',                      icon: Github   },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/nikola-vujić-aa9687152',   icon: Linkedin },
+  { label: 'CV',       sectionId: 'cv',                                          icon: FileText },
+];
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type IntroContentProps = {
-  onComplete: () => void;
+  onNavigate: (sectionId: string) => void;
   skipAnimation?: boolean;
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export function IntroContent({ onComplete, skipAnimation = false }: IntroContentProps) {
+export function IntroContent({ onNavigate, skipAnimation = false }: IntroContentProps) {
   const [summaryComplete, setSummaryComplete] = useState(skipAnimation);
   const [showImage,    setShowImage]    = useState(false);
   const [showLinks,    setShowLinks]    = useState(false);
   const [showControls, setShowControls] = useState(false);
+  const [clickCount,   setClickCount]   = useState(0);
+  const [skipped,      setSkipped]      = useState(false);
 
   const linksVisible    = showImage && showLinks;
   const controlsVisible = showImage && showControls;
@@ -85,15 +91,31 @@ export function IntroContent({ onComplete, skipAnimation = false }: IntroContent
 
   const handleComplete = () => {
     setSummaryComplete(true);
-    onComplete();
   };
 
-  const scrollToSection = (targetId: string) => {
-    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const handleSkip = () => {
+    setSkipped(true);
+    setSummaryComplete(true);
+    setShowImage(true);
+    setShowLinks(true);
+    setShowControls(true);
   };
 
   return (
-    <section className="min-h-svh px-4 pt-10 pb-6 sm:px-5 sm:pt-16 sm:pb-8 md:px-12 md:pt-24 md:pb-10">
+    <section
+      className="mx-auto w-281.5 max-w-full min-h-svh select-none px-4 pt-10 pb-6 sm:px-5 sm:pt-16 sm:pb-8 md:px-12 md:pt-24 md:pb-10"
+      onClick={() => setClickCount((c) => c + 1)}
+    >
+      {clickCount >= 8 && !controlsVisible && (
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); handleSkip(); }}
+          className="fixed top-4 right-4 z-50 inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-(--accent-border) bg-(--accent-bg)/75 px-4 py-2 text-xs font-medium text-(--text-h) backdrop-blur-sm transform-gpu will-change-transform transition-[transform,border-color] duration-200 hover:transform-[translateY(-2px)] hover:border-(--accent)"
+        >
+          Skip
+          <ArrowRight className="h-3.5 w-3.5 translate-y-px" strokeWidth={2} />
+        </button>
+      )}
       <motion.div
         layout
         transition={imageLayoutTransition}
@@ -132,7 +154,8 @@ export function IntroContent({ onComplete, skipAnimation = false }: IntroContent
             transition={{ ...heroTransition, delay: 0.24 }}
           >
             <IntroDescriptionSequence
-              skipAnimation={skipAnimation}
+              key={skipped ? 'skipped' : 'normal'}
+              skipAnimation={skipAnimation || skipped}
               onComplete={handleComplete}
             />
           </motion.div>
@@ -171,6 +194,20 @@ export function IntroContent({ onComplete, skipAnimation = false }: IntroContent
                   >
                     {introLinkItems.map((item) => {
                       const Icon = item.icon;
+                      const sharedClass = "inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-(--accent-border) bg-(--accent-bg)/75 text-(--text-h) shadow-[var(--shadow)] transform-gpu will-change-transform transition-[transform,border-color,background-color] duration-200 hover:[transform:translateY(-2px)] hover:border-(--accent) hover:bg-(--accent-bg)";
+                      if ('sectionId' in item) {
+                        return (
+                          <button
+                            key={item.label}
+                            type="button"
+                            aria-label={item.label}
+                            onClick={() => onNavigate(item.sectionId)}
+                            className={sharedClass}
+                          >
+                            <Icon className="h-5 w-5" strokeWidth={1.9} />
+                          </button>
+                        );
+                      }
                       return (
                         <a
                           key={item.label}
@@ -178,7 +215,7 @@ export function IntroContent({ onComplete, skipAnimation = false }: IntroContent
                           target="_blank"
                           rel="noreferrer"
                           aria-label={item.label}
-                          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-(--accent-border) bg-(--accent-bg)/75 text-(--text-h) shadow-[var(--shadow)] transform-gpu will-change-transform transition-[transform,border-color,background-color] duration-200 hover:[transform:translateY(-2px)] hover:border-(--accent) hover:bg-(--accent-bg)"
+                          className={sharedClass}
                         >
                           <Icon className="h-5 w-5" strokeWidth={1.9} />
                         </a>
@@ -207,7 +244,7 @@ export function IntroContent({ onComplete, skipAnimation = false }: IntroContent
                 <button
                   key={item.targetId}
                   type="button"
-                  onClick={() => scrollToSection(item.targetId)}
+                  onClick={() => onNavigate(item.targetId)}
                   className="cursor-pointer rounded-full border border-(--accent-border) bg-(--accent-bg) px-4 py-2.5 text-xs font-medium text-(--text-h) transform-gpu will-change-transform transition-[transform,border-color] duration-200 hover:[transform:translateY(-2px)] hover:border-(--accent) sm:px-5 sm:py-3 sm:text-sm"
                 >
                   {item.label}
