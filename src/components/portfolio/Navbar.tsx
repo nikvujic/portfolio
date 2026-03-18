@@ -67,7 +67,7 @@ export function Navbar() {
         {/* Right: nav links — desktop */}
         <ul className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
-            <li key={item.id} className="relative pb-1">
+            <li key={item.id} className="relative">
               <button
                 type="button"
                 onClick={() => scrollTo(item.id)}
@@ -82,7 +82,7 @@ export function Navbar() {
               {activeId === item.id && (
                 <motion.span
                   layoutId="nav-indicator"
-                  className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-(--accent)"
+                  className="absolute -bottom-1.5 left-0 right-0 h-[1.5px] bg-(--accent)"
                   transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                 />
               )}
