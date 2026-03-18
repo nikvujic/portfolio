@@ -18,7 +18,7 @@ export function Content({ visible }: ContentProps) {
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="flex flex-col"
+      className="flex flex-col transform-gpu will-change-transform"
     >
       <ProjectsSection />
       <AIBioGenerator />

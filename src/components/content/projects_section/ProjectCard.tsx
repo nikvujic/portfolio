@@ -6,7 +6,7 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="rounded-[2rem] border border-(--border) p-6 text-left transition-transform duration-200 hover:-translate-y-1">
+    <article className="rounded-[2rem] border border-(--border) p-6 text-left transform-gpu will-change-transform transition-transform duration-200 hover:-translate-y-1">
       <div className="mb-4 flex items-start justify-between gap-4">
         <div>
           <p className="mb-2 text-xs uppercase tracking-[0.14em] text-(--accent)">

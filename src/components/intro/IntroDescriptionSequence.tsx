@@ -16,10 +16,10 @@ type SequencePhase =
   | 'summary'
   | 'done';
 
-const INITIAL_LIST_PAUSE_MS = 3000;
+const INITIAL_LIST_PAUSE_MS = 800;
 const NORMAL_LIST_DELAY_MS = 580;
-const SHORT_LIST_PAUSE_MS = 2500;
-const MEDIUM_LIST_PAUSE_MS = 1200;
+const SHORT_LIST_PAUSE_MS = 580;
+const MEDIUM_LIST_PAUSE_MS = 800;
 const MEDIUM_LIST_DELAY_MS = 280;
 const QUICK_LIST_DELAY_MS = 210;
 const FAST_LIST_DELAY_MS = 120;
@@ -36,7 +36,9 @@ const TEXT_AREA_LAYOUT_DURATION_MS = 0.28;
 const promptText =
   'Write a concise summary of Nikola Vujic based on skills and experience.';
 const summaryText =
-  'Frontend-focused engineer building scalable web apps, polished interfaces, and product-minded experiences with Angular and TypeScript, while exploring React, Node.js, full-stack development, and AI-powered features.';
+  'Frontend-focused engineer building scalable web apps, polished interfaces, and product-minded experiences with Angular and TypeScript, while expanding into React, Node.js, full-stack development, and AI-powered features.';
+const mobileInputClass =
+  'min-h-[5.5rem] whitespace-pre-wrap rounded-[0.95rem] px-3 py-0.5 text-left text-sm leading-7 md:px-0 md:py-0 md:text-base';
 
 export function IntroDescriptionSequence({
   onComplete,
@@ -207,8 +209,10 @@ export function IntroDescriptionSequence({
         layout={!isLinesPhase}
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
         className={[
-          'rounded-[0.5rem]',
-          isLinesPhase ? 'overflow-visible py-5 pr-0 pl-0' : 'overflow-hidden p-5',
+          'rounded-[0.5rem] transform-gpu will-change-transform',
+          isLinesPhase
+            ? 'overflow-visible py-5 pr-0 pl-0'
+            : 'overflow-hidden p-3 md:p-4',
           isLinesPhase
             ? 'border border-transparent'
             : 'border border-(--accent-border) bg-(--accent-bg)/40',
@@ -218,7 +222,7 @@ export function IntroDescriptionSequence({
           layout={!isLinesPhase}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className={
-            isLinesPhase ? '' : isCollapsePhase ? 'grid items-start' : 'flex flex-col'
+            isLinesPhase ? 'transform-gpu will-change-transform' : isCollapsePhase ? 'grid items-start transform-gpu will-change-transform' : 'flex flex-col transform-gpu will-change-transform'
           }
         >
           {showLines && (
@@ -282,7 +286,7 @@ export function IntroDescriptionSequence({
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                 style={{ originY: 0 }}
                 className={[
-                  'relative rounded-[1.25rem] border border-(--border) bg-(--bg) p-2 md:p-5',
+                  'relative rounded-[1.25rem] border border-(--border) bg-(--bg) p-2 md:px-5 md:py-3',
                   isCollapsePhase ? 'flex h-full min-h-full flex-col' : '',
                 ].join(' ')}
               >
@@ -311,7 +315,7 @@ export function IntroDescriptionSequence({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: TEXT_AREA_LAYOUT_DURATION_MS, ease: 'easeOut' }}
-                    className="h-full min-h-[5.5rem] flex-1 text-left text-sm text-(--text) md:text-base"
+                    className={`h-full flex-1 text-(--text) ${mobileInputClass}`}
                   >
                   </motion.p>
                 )}
@@ -320,7 +324,7 @@ export function IntroDescriptionSequence({
                   <motion.p
                     layout={false}
                     transition={{ duration: TEXT_AREA_LAYOUT_DURATION_MS, ease: 'easeOut' }}
-                    className="min-h-[5.5rem] whitespace-pre-wrap text-left text-sm leading-7 text-(--text-h) md:text-base"
+                    className={`${mobileInputClass} text-(--text-h)`}
                   >
                     <motion.span
                       animate={{ opacity: [1, 0, 1] }}
@@ -336,7 +340,7 @@ export function IntroDescriptionSequence({
                   <motion.p
                     layout={false}
                     transition={{ duration: TEXT_AREA_LAYOUT_DURATION_MS, ease: 'easeOut' }}
-                    className="min-h-[5.5rem] whitespace-pre-wrap text-left text-sm leading-7 text-(--text-h) md:text-base"
+                    className={`${mobileInputClass} text-(--text-h)`}
                   >
                     {typedPrompt}
                     <motion.span
@@ -353,7 +357,7 @@ export function IntroDescriptionSequence({
                   <motion.p
                     layout={false}
                     transition={{ duration: TEXT_AREA_LAYOUT_DURATION_MS, ease: 'easeOut' }}
-                    className="min-h-[5.5rem] whitespace-pre-wrap text-left text-sm leading-7 text-(--text-h) md:text-base"
+                    className={`${mobileInputClass} text-(--text-h)`}
                   >
                     {typedSummary}
                     {phase !== 'done' && (
