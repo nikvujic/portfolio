@@ -1,34 +1,45 @@
 @import "tailwindcss";
 
+/* ─── Base resets ──────────────────────────────────────────────────────────── */
 @layer base {
   p {
     margin: 0;
   }
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ─── Design tokens — light (default) ─────────────────────────────────────── */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  /* Colors */
+  --text:           #5c5670;
+  --text-h:         #1b1528;
+  --bg:             #f7f5fb;
+  --border:         #ddd9e8;
+  --code-bg:        #edeaf5;
+  --accent:         #9333ea;
+  --accent-bg:      rgba(147, 51, 234, 0.08);
+  --accent-border:  rgba(147, 51, 234, 0.3);
+  --social-bg:      rgba(237, 234, 245, 0.6);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 0.625rem 0.9375rem -0.1875rem,
-    rgba(0, 0, 0, 0.05) 0 0.25rem 0.375rem -0.125rem;
+    rgba(90, 60, 130, 0.1) 0 0.625rem 0.9375rem -0.1875rem,
+    rgba(90, 60, 130, 0.05) 0 0.25rem 0.375rem -0.125rem;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  /* Typography */
+  --sans:    system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --mono:    ui-monospace, Consolas, monospace;
 
+  /* Base styles */
   font-size: 1.125rem;
   line-height: 1.45;
   font-family: var(--sans);
   letter-spacing: 0.01rem;
-  color-scheme: light dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -43,44 +54,63 @@
   }
 }
 
+/* ─── Design tokens — dark ────────────────────────────────────────────────── */
+
+/* Applied automatically when system prefers dark and no manual override is set */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
+  :root:not([data-theme]) {
+    --text:           #9ca3af;
+    --text-h:         #f3f4f6;
+    --bg:             #16171d;
+    --border:         #2e303a;
+    --code-bg:        #1f2028;
+    --accent:         #c084fc;
+    --accent-bg:      rgba(192, 132, 252, 0.15);
+    --accent-border:  rgba(192, 132, 252, 0.5);
+    --social-bg:      rgba(47, 48, 58, 0.5);
     --shadow:
       rgba(0, 0, 0, 0.4) 0 0.625rem 0.9375rem -0.1875rem,
       rgba(0, 0, 0, 0.25) 0 0.25rem 0.375rem -0.125rem;
+
+    color-scheme: dark;
   }
 }
 
-html {
-  background: var(--bg);
+/* Applied when the user manually selects dark mode */
+[data-theme="dark"] {
+  --text:           #9ca3af;
+  --text-h:         #f3f4f6;
+  --bg:             #16171d;
+  --border:         #2e303a;
+  --code-bg:        #1f2028;
+  --accent:         #c084fc;
+  --accent-bg:      rgba(192, 132, 252, 0.15);
+  --accent-border:  rgba(192, 132, 252, 0.5);
+  --social-bg:      rgba(47, 48, 58, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 0.625rem 0.9375rem -0.1875rem,
+    rgba(0, 0, 0, 0.25) 0 0.25rem 0.375rem -0.125rem;
+
+  color-scheme: dark;
 }
+
+/* ─── Global elements ─────────────────────────────────────────────────────── */
+html {
+  background-color: var(--bg);
+}
+
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   font-family: var(--sans);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }
 
 #root {
   width: 100%;
   min-height: 100svh;
-  background: var(--bg);
+  background: transparent;
 }
 
 h1,

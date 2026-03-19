@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import { Menu } from 'lucide-react';
+import { Layers, Menu, Moon, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../../contexts/useTheme';
 import profileImage from '../../assets/images/profile.jpeg';
 
 const INTRO_SEEN_KEY = 'intro-animation-seen';
@@ -16,6 +17,7 @@ const navItems = [
 
 export function Navbar() {
   const navigate = useNavigate();
+  const { theme, toggleTheme, bgVariant, cycleBgVariant } = useTheme();
   const [activeId, setActiveId] = useState<string>(navItems[0].id);
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-(--border) bg-(--bg)/90 backdrop-blur-sm">
+    <header data-theme="dark" className="sticky top-0 z-50 border-b border-(--border) bg-(--bg)/90 backdrop-blur-sm">
       <nav className="flex items-center justify-between px-5 py-3 md:px-12">
         {/* Left: profile + name */}
         <div className="flex items-center gap-3">
@@ -66,6 +68,33 @@ export function Navbar() {
 
         {/* Right: nav links — desktop */}
         <ul className="hidden items-center gap-6 md:flex">
+          {theme === 'dark' && (
+            <li>
+              <button
+                type="button"
+                onClick={cycleBgVariant}
+                aria-label="Cycle background"
+                className={`flex cursor-pointer items-center transition-opacity duration-150 hover:opacity-100 ${bgVariant === 'none' ? 'text-(--text) opacity-40' : 'text-(--accent) opacity-70'}`}
+              >
+                <Layers className="h-3.5 w-3.5" strokeWidth={1.75} />
+              </button>
+            </li>
+          )}
+          <li>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="flex cursor-pointer items-center text-(--text) opacity-40 transition-opacity duration-150 hover:opacity-100"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-3.5 w-3.5" strokeWidth={1.75} />
+              ) : (
+                <Moon className="h-3.5 w-3.5" strokeWidth={1.75} />
+              )}
+            </button>
+          </li>
+          <li aria-hidden="true" className="h-4 w-[1.5px] self-center bg-(--border)" />
           {navItems.map((item) => (
             <li key={item.id} className="relative">
               <button
@@ -88,7 +117,7 @@ export function Navbar() {
               )}
             </li>
           ))}
-          <li aria-hidden="true" className="h-4 w-[1.5px] self-center translate-y-0.5 bg-(--border)" />
+          <li aria-hidden="true" className="h-4 w-[1.5px] self-center bg-(--border)" />
           <li>
             <button
               type="button"

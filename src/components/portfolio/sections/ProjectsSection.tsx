@@ -12,6 +12,17 @@ export function ProjectsSection() {
           Projects & Plans
         </h2>
         <p className="mt-4 text-sm text-(--text) md:text-base">Placeholder — content coming soon.</p>
+        <p className="pt-3">this app (with comments, techs etc.)</p>
+        <ul>
+          <li>-pause design, deploy and hosting, CICD, add as project</li>
+        </ul>
+        <p className="pt-3">mini project tracker</p>
+        <ul>
+          <p>-change text and summaries</p>
+          <p>-add socials on normal</p>
+          <p>-mobile layouts and menu</p>
+          <p>-white theme improvements</p>
+        </ul>
       </div>
     </section>
   );

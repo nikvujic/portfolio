@@ -18,6 +18,7 @@ export function PortfolioPage() {
     if (el) {
       mainRef.current.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
     }
+    window.history.replaceState(null, '');
   }, []);
 
   return (
