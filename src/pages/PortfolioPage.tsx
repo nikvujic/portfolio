@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Navbar } from '../components/portfolio/Navbar';
 import { AISummarySection } from '../components/portfolio/sections/AISummarySection';
@@ -9,18 +9,21 @@ import { TechnologiesSection } from '../components/portfolio/sections/Technologi
 
 export function PortfolioPage() {
   const location = useLocation();
+  const mainRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const section = (location.state as { section?: string } | null)?.section;
-    if (section) {
-      document.getElementById(section)?.scrollIntoView({ behavior: 'instant' });
+    if (!section || !mainRef.current) return;
+    const el = document.getElementById(section);
+    if (el) {
+      mainRef.current.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
     }
   }, []);
 
   return (
     <div className="flex h-screen flex-col overflow-hidden">
       <Navbar />
-      <main className="flex-1 snap-y snap-mandatory overflow-y-scroll">
+      <main ref={mainRef} className="flex-1 snap-y snap-mandatory overflow-y-scroll">
         <ProfileSection />
         <AISummarySection />
         <ProjectsSection />
