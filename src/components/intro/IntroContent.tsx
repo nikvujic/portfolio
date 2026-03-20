@@ -43,7 +43,7 @@ type SectionLinkItem   = { label: string; sectionId: string; icon: LucideIcon; i
 type IntroLinkItem     = ExternalLinkItem | SectionLinkItem;
 
 const introLinkItems: ReadonlyArray<IntroLinkItem> = [
-  { label: 'GitHub',   href: 'https://github.com/nikvujic',                      icon: Github,   iconClassName: 'translate-x-px translate-y-[0.5px]' },
+  { label: 'GitHub',   href: 'https://github.com/nikvujic',                      icon: Github,   iconClassName: 'translate-y-[0.5px]' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/nikola-vujić-aa9687152',   icon: Linkedin, iconClassName: 'translate-x-px'                      },
   { label: 'CV',       sectionId: 'cv',                                          icon: FileText, iconClassName: 'translate-x-px' },
 ];

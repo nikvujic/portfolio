@@ -1,34 +1,58 @@
 import type { Project } from '../types/project';
+import portfolio1 from '../assets/images/portfolio1.png';
+import portfolio2 from '../assets/images/portfolio2.png';
 
 export const projects: Project[] = [
   {
-    title: 'AI Portfolio Generator',
-    category: 'Portfolio App',
+    id: 'portfolio',
+    title: 'Portfolio',
     description:
-      'An interactive personal website concept with animated skills, AI-generated profile summaries, and polished recruiter-facing presentation.',
-    tech: ['React', 'TypeScript', 'Tailwind'],
-    status: 'In Progress',
+      'An interactive personal portfolio with an animated intro sequence, AI-powered summary interface, and polished recruiter-facing presentation.',
+    status: 'in-progress',
+    type: 'production',
+    technologies: [
+      { name: 'React',          category: 'frontend' },
+      { name: 'TypeScript',     category: 'frontend' },
+      { name: 'Tailwind CSS',   category: 'frontend' },
+      { name: 'Framer Motion',  category: 'frontend' },
+      { name: 'React Router',   category: 'frontend' },
+      { name: 'Vite',           category: 'devops'   },
+      { name: 'GitHub',         category: 'devops'   },
+    ],
+    detailedOverview:
+      'Built from scratch as a showcase of frontend craft - featuring a multi-phase animated intro, a theme system with CSS design tokens, snap-scroll section navigation with an active indicator, and a coming AI chat interface trained on my CV. Deployed as a static SPA.',
+    images: [portfolio1, portfolio2],
   },
   {
-    title: 'Real-Time Notification Center',
-    category: 'Frontend Concept',
+    id: 'project-tracker',
+    title: 'Project Tracker',
     description:
-      'A product-style dashboard concept focused on event streams, real-time updates, filtering, and clean interaction patterns.',
-    tech: ['React', 'TypeScript', 'WebSockets'],
-    status: 'Planned',
+      'A lightweight personal kanban board for tracking projects, ideas, and ongoing tasks across different stages.',
+    status: 'planned',
+    type: 'productivity',
+    technologies: [
+      { name: 'React',        category: 'frontend' },
+      { name: 'TypeScript',   category: 'frontend' },
+      { name: 'Tailwind CSS', category: 'frontend' },
+      { name: 'Node.js',      category: 'backend'  },
+    ],
+    detailedOverview:
+      'A simple but well-designed tool to manage my own project pipeline - with columns for backlog, in progress, and done. Focused on fast capture and clean UX. Likely synced via a lightweight backend or local-first storage.',
   },
   {
-    title: 'White-Label Admin UI',
-    category: 'Case Study',
+    id: 'ai-chat-sandbox',
+    title: 'AI Chat Sandbox',
     description:
-      'A scalable admin interface concept showing reusable layouts, customizable branding, and modular component structure.',
-    tech: ['Angular', 'TypeScript', 'SCSS'],
+      'A minimal chat interface for experimenting with AI models and prompt patterns.',
+    status: 'planned',
+    type: 'sandbox',
+    technologies: [
+      { name: 'React',        category: 'frontend' },
+      { name: 'TypeScript',   category: 'frontend' },
+      { name: 'Claude API',   category: 'backend'  },
+    ],
+    detailedOverview:
+      'A throwaway sandbox for testing Claude API integrations, prompt structures, and simple UI patterns around chat. No fixed scope - just a place to try things.',
   },
-  {
-    title: 'Mobile Companion Experience',
-    category: 'Case Study',
-    description:
-      'A cross-platform product presentation page focused on feature communication, clean UI hierarchy, and app-style interactions.',
-    tech: ['Ionic', 'Angular', 'Firebase'],
-  },
+
 ];

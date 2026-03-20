@@ -6,7 +6,7 @@ export function AISummarySection() {
     >
       <div className="mx-auto w-full max-w-281.5 px-5 md:px-12">
         <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-(--accent)">
-          AI-generated
+          Talk to my CV
         </p>
         <h2 className="text-5xl tracking-[-0.04em] text-(--text-h) md:text-6xl">
           AI Summary

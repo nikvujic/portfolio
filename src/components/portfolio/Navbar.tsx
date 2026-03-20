@@ -24,22 +24,25 @@ export function Navbar() {
     const root = document.querySelector('main');
     if (!root) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveId(visible.target.id);
-      },
-      { root, threshold: 0.5 },
-    );
+    const update = () => {
+      const scrollTop = root.scrollTop;
+      let bestId = navItems[0].id;
+      let bestDist = Infinity;
+      for (const { id } of navItems) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const dist = Math.abs(el.offsetTop - scrollTop);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestId = id;
+        }
+      }
+      setActiveId(bestId);
+    };
 
-    navItems.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    update();
+    root.addEventListener('scroll', update, { passive: true });
+    return () => root.removeEventListener('scroll', update);
   }, []);
 
   const scrollTo = (id: string) => {

@@ -167,7 +167,7 @@ export function DarkBackground({ variant }: { variant: Exclude<BgVariant, 'none'
     <svg
       viewBox="0 0 680 450"
       xmlns="http://www.w3.org/2000/svg"
-      className="pointer-events-none fixed inset-0 h-full w-full"
+      className="pointer-events-none fixed inset-0 -z-10 h-full w-full"
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
     >
