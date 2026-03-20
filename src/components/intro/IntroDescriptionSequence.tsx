@@ -24,7 +24,7 @@ const MEDIUM_LIST_DELAY_MS = 280;
 const QUICK_LIST_DELAY_MS = 210;
 const FAST_LIST_DELAY_MS = 120;
 const VERY_FAST_LIST_DELAY_MS = 20;
-const PRE_PROMPT_PAUSE_MS = 3000;
+const PRE_PROMPT_PAUSE_MS = 1500;
 const POST_PROMPT_PAUSE_MS = 4500;
 const POST_CLEAR_PAUSE_MS = 1500;
 const PROMPT_TYPING_DELAY_MS = 18;
@@ -34,9 +34,9 @@ const CHIP_DISAPPEAR_DURATION_MS = 0.22;
 const TEXT_AREA_LAYOUT_DURATION_MS = 0.28;
 
 const promptText =
-  'Write a concise summary of Nikola Vujic based on skills and experience.';
+  'Who is Nikola Vujic?';
 const summaryText =
-  'Frontend-focused engineer building scalable web apps, polished interfaces, and product-minded experiences with Angular and TypeScript, while expanding into React, Node.js, full-stack development, and AI-powered features.';
+  'Frontend-focused engineer building scalable web apps, polished interfaces, and product-minded experiences with Angular and TypeScript, while expanding into React, Node.js, full-stack development, and AI powered features.';
 const mobileInputClass =
   'min-h-[5.5rem] whitespace-pre-wrap rounded-[0.95rem] px-3 py-0.5 text-left text-sm leading-7 md:px-0 md:py-0 md:text-base';
 

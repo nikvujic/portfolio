@@ -38,14 +38,14 @@ const introNavItems = [
   { label: 'Technologies', targetId: 'technologies' },
 ] as const;
 
-type ExternalLinkItem  = { label: string; href: string;      icon: LucideIcon };
-type SectionLinkItem   = { label: string; sectionId: string; icon: LucideIcon };
+type ExternalLinkItem  = { label: string; href: string;      icon: LucideIcon; iconClassName?: string };
+type SectionLinkItem   = { label: string; sectionId: string; icon: LucideIcon; iconClassName?: string };
 type IntroLinkItem     = ExternalLinkItem | SectionLinkItem;
 
 const introLinkItems: ReadonlyArray<IntroLinkItem> = [
-  { label: 'GitHub',   href: 'https://github.com/nikvujic',                      icon: Github   },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/nikola-vujić-aa9687152',   icon: Linkedin },
-  { label: 'CV',       sectionId: 'cv',                                          icon: FileText },
+  { label: 'GitHub',   href: 'https://github.com/nikvujic',                      icon: Github,   iconClassName: 'translate-x-px translate-y-[0.5px]' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/nikola-vujić-aa9687152',   icon: Linkedin, iconClassName: 'translate-x-px'                      },
+  { label: 'CV',       sectionId: 'cv',                                          icon: FileText, iconClassName: 'translate-x-px' },
 ];
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -106,7 +106,7 @@ export function IntroContent({ onNavigate, skipAnimation = false }: IntroContent
       className="mx-auto w-281.5 max-w-full min-h-svh select-none px-4 pt-10 pb-6 sm:px-5 sm:pt-16 sm:pb-8 md:px-12 md:pt-24 md:pb-10"
       onClick={() => setClickCount((c) => c + 1)}
     >
-      {clickCount >= 8 && !controlsVisible && (
+      {clickCount >= 2 && !controlsVisible && (
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); handleSkip(); }}
@@ -130,7 +130,7 @@ export function IntroContent({ onNavigate, skipAnimation = false }: IntroContent
           transition={{ ...heroTransition, layout: imageLayoutTransition }}
         >
           <motion.h1
-            className="-ml-[0.05em] mb-2 text-5xl leading-none tracking-[-0.07em] md:text-7xl lg:text-[5.5rem] transform-gpu will-change-transform"
+            className={`-ml-[0.05em] mb-2 text-5xl leading-none tracking-[-0.07em] md:text-7xl lg:text-[5.5rem] transform-gpu will-change-transform${controlsVisible ? ' select-text' : ''}`}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...heroTransition, delay: 0.08 }}
@@ -139,16 +139,16 @@ export function IntroContent({ onNavigate, skipAnimation = false }: IntroContent
           </motion.h1>
 
           <motion.p
-            className="mb-4 ml-px text-base font-medium text-(--accent) md:text-lg transform-gpu will-change-transform"
+            className={`mb-4 ml-px text-base font-medium text-(--accent) md:text-lg transform-gpu will-change-transform${controlsVisible ? ' select-text' : ''}`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...heroTransition, delay: 0.16 }}
           >
-            Frontend Engineer expanding into Full-Stack development and AI-powered features
+            Frontend Engineer expanding into Full-Stack development and AI powered features
           </motion.p>
 
           <motion.div
-            className="transform-gpu will-change-transform"
+            className={`transform-gpu will-change-transform${controlsVisible ? ' select-text' : ''}`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...heroTransition, delay: 0.24 }}
@@ -179,7 +179,7 @@ export function IntroContent({ onNavigate, skipAnimation = false }: IntroContent
             >
               <motion.img
                 src={profileImage}
-                alt="Nikola Vujic"
+                alt=""
                 className="h-48 w-48 max-[380px]:h-36 max-[380px]:w-36 rounded-full border-2 border-(--accent-border) object-cover shadow-[var(--shadow)] transform-gpu will-change-transform md:h-56 md:w-56 lg:h-64 lg:w-64"
               />
 
@@ -195,6 +195,7 @@ export function IntroContent({ onNavigate, skipAnimation = false }: IntroContent
                     {introLinkItems.map((item) => {
                       const Icon = item.icon;
                       const sharedClass = "inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-(--accent-border) bg-(--accent-bg)/75 text-(--text-h) shadow-[var(--shadow)] transform-gpu will-change-transform transition-[transform,border-color,background-color] duration-200 hover:[transform:translateY(-2px)] hover:border-(--accent) hover:bg-(--accent-bg)";
+                      const iconClass = `h-5 w-5${item.iconClassName ? ` ${item.iconClassName}` : ''}`;
                       if ('sectionId' in item) {
                         return (
                           <button
@@ -204,7 +205,7 @@ export function IntroContent({ onNavigate, skipAnimation = false }: IntroContent
                             onClick={() => onNavigate(item.sectionId)}
                             className={sharedClass}
                           >
-                            <Icon className="h-5 w-5" strokeWidth={1.9} />
+                            <Icon className={iconClass} strokeWidth={1.9} />
                           </button>
                         );
                       }
@@ -217,7 +218,7 @@ export function IntroContent({ onNavigate, skipAnimation = false }: IntroContent
                           aria-label={item.label}
                           className={sharedClass}
                         >
-                          <Icon className="h-5 w-5" strokeWidth={1.9} />
+                          <Icon className={iconClass} strokeWidth={1.9} />
                         </a>
                       );
                     })}

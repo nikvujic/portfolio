@@ -11,7 +11,10 @@ export function ProfileSection() {
         <h2 className="text-5xl tracking-[-0.04em] text-(--text-h) md:text-6xl">
           Profile
         </h2>
-        <p className="mt-4 text-sm text-(--text) md:text-base">Placeholder — content coming soon.</p>
+        <p className="mt-4 text-sm text-(--text) md:text-base">
+          A bit more about who I am - where I'm coming from, what I care about, and how I work.
+        </p>
+        <p className="mt-3 text-sm text-(--accent) md:text-base">Coming soon.</p>
       </div>
     </section>
   );

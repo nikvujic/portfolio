@@ -13,7 +13,7 @@
   box-sizing: border-box;
 }
 
-/* ─── Design tokens — light (default) ─────────────────────────────────────── */
+/* ─── Design tokens - light (default) ─────────────────────────────────────── */
 :root {
   /* Colors */
   --text:           #5c5670;
@@ -54,7 +54,7 @@
   }
 }
 
-/* ─── Design tokens — dark ────────────────────────────────────────────────── */
+/* ─── Design tokens - dark ────────────────────────────────────────────────── */
 
 /* Applied automatically when system prefers dark and no manual override is set */
 @media (prefers-color-scheme: dark) {

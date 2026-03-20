@@ -11,7 +11,10 @@ export function TechnologiesSection() {
         <h2 className="text-5xl tracking-[-0.04em] text-(--text-h) md:text-6xl">
           Technologies
         </h2>
-        <p className="mt-4 text-sm text-(--text) md:text-base">Placeholder — content coming soon.</p>
+        <p className="mt-4 text-sm text-(--text) md:text-base">
+          An overview of the tools and technologies I work with - each with notes on how and why I use them.
+        </p>
+        <p className="mt-3 text-sm text-(--accent) md:text-base">Coming soon.</p>
       </div>
     </section>
   );

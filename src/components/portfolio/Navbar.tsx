@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Layers, Menu, Moon, Sun } from 'lucide-react';
+import { Github, Layers, Linkedin, Menu } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../contexts/useTheme';
@@ -17,7 +17,7 @@ const navItems = [
 
 export function Navbar() {
   const navigate = useNavigate();
-  const { theme, toggleTheme, bgVariant, cycleBgVariant } = useTheme();
+  const { theme, bgVariant, cycleBgVariant } = useTheme();
   const [activeId, setActiveId] = useState<string>(navItems[0].id);
 
   useEffect(() => {
@@ -58,15 +58,35 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <img
             src={profileImage}
-            alt="Nikola Vujic"
+            alt=""
             className="h-9 w-9 rounded-full object-cover"
           />
           <span className="text-sm font-semibold tracking-tight text-(--text-h)">
             Nikola Vujic
           </span>
+          <div className="flex items-center gap-2 ml-2">
+            <a
+              href="https://github.com/nikvujic"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+              className="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-(--accent-border) bg-(--accent-bg)/75 text-(--text-h) transform-gpu transition-[transform,border-color,background-color] duration-200 hover:transform-[translateY(-2px)] hover:border-(--accent) hover:bg-(--accent-bg)"
+            >
+              <Github className="h-3.5 w-3.5 translate-x-px translate-y-[0.5px]" strokeWidth={1.9} />
+            </a>
+            <a
+              href="https://linkedin.com/in/nikola-vujić-aa9687152"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-(--accent-border) bg-(--accent-bg)/75 text-(--text-h) transform-gpu transition-[transform,border-color,background-color] duration-200 hover:transform-[translateY(-2px)] hover:border-(--accent) hover:bg-(--accent-bg)"
+            >
+              <Linkedin className="h-3.5 w-3.5 translate-x-px" strokeWidth={1.9} />
+            </a>
+          </div>
         </div>
 
-        {/* Right: nav links — desktop */}
+        {/* Right: nav links - desktop */}
         <ul className="hidden items-center gap-6 md:flex">
           {theme === 'dark' && (
             <li>
@@ -80,20 +100,6 @@ export function Navbar() {
               </button>
             </li>
           )}
-          <li>
-            <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className="flex cursor-pointer items-center text-(--text) opacity-40 transition-opacity duration-150 hover:opacity-100"
-            >
-              {theme === 'dark' ? (
-                <Sun className="h-3.5 w-3.5" strokeWidth={1.75} />
-              ) : (
-                <Moon className="h-3.5 w-3.5" strokeWidth={1.75} />
-              )}
-            </button>
-          </li>
           <li aria-hidden="true" className="h-4 w-[1.5px] self-center bg-(--border)" />
           {navItems.map((item) => (
             <li key={item.id} className="relative">

@@ -11,18 +11,10 @@ export function ProjectsSection() {
         <h2 className="text-5xl tracking-[-0.04em] text-(--text-h) md:text-6xl">
           Projects & Plans
         </h2>
-        <p className="mt-4 text-sm text-(--text) md:text-base">Placeholder — content coming soon.</p>
-        <p className="pt-3">this app (with comments, techs etc.)</p>
-        <ul>
-          <li>-pause design, deploy and hosting, CICD, add as project</li>
-        </ul>
-        <p className="pt-3">mini project tracker</p>
-        <ul>
-          <p>-change text and summaries</p>
-          <p>-add socials on normal</p>
-          <p>-mobile layouts and menu</p>
-          <p>-white theme improvements</p>
-        </ul>
+        <p className="mt-4 text-sm text-(--text) md:text-base">
+          A collection of shipped work, projects currently in progress, ideas in the pipeline, and smaller experiments built to explore or test something specific.
+        </p>
+        <p className="mt-3 text-sm text-(--accent) md:text-base">Coming soon.</p>
       </div>
     </section>
   );
