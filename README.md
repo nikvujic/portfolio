@@ -38,7 +38,7 @@ Sections: **Profile** - **AI Summary** - **Projects** - **Technologies** - **CV*
 - Animated SVG backgrounds with 5 variants (waves, flow, radial, circles)
 - Project cards with expandable detail, tech tags, and swipeable image carousel
 - Responsive layout with hamburger menu below 900px
-- AI Summary section (coming soon) - Claude trained on CV
+- AI Summary section (coming soon)
 
 ---
 
