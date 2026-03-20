@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Project, TechCategory } from '../../types/project';
 
 // ─── Config ───────────────────────────────────────────────────────────────────
@@ -33,9 +33,32 @@ function ImageCarousel({ images }: { images: string[] }) {
   const [current, setCurrent]     = useState(0);
   const [dragStart, setDragStart] = useState<number | null>(null);
   const [dragging, setDragging]   = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const touchOrigin = useRef<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    const onTouchStart = (e: TouchEvent) => {
+      touchOrigin.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (!touchOrigin.current) return;
+      const dx = Math.abs(e.touches[0].clientX - touchOrigin.current.x);
+      const dy = Math.abs(e.touches[0].clientY - touchOrigin.current.y);
+      if (dx > dy) e.preventDefault();
+    };
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+    };
+  }, []);
 
   return (
     <div
+      ref={wrapperRef}
       className="relative mt-5 aspect-video overflow-hidden rounded-xl bg-(--border)/30"
       onClick={(e) => e.stopPropagation()}
     >

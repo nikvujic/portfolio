@@ -19,7 +19,6 @@ type SequencePhase =
 const INITIAL_LIST_PAUSE_MS = 800;
 const NORMAL_LIST_DELAY_MS = 580;
 const SHORT_LIST_PAUSE_MS = 580;
-const MEDIUM_LIST_PAUSE_MS = 800;
 const MEDIUM_LIST_DELAY_MS = 280;
 const QUICK_LIST_DELAY_MS = 210;
 const FAST_LIST_DELAY_MS = 120;
@@ -66,10 +65,6 @@ export function IntroDescriptionSequence({
 
     if (count >= 6 && count < 12) {
       return MEDIUM_LIST_DELAY_MS;
-    }
-
-    if (count === 12) {
-      return MEDIUM_LIST_PAUSE_MS;
     }
 
     if (count > 12 && count < 21) {
