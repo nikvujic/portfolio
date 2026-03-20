@@ -2,7 +2,7 @@
 
 Personal portfolio SPA built from scratch. Animated intro, snap-scroll sections, theme system, and a coming AI chat interface trained on my CV.
 
-**Live at:** (coming soon...)
+**Live at:** coming soon...
 
 ---
 
