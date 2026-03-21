@@ -15,10 +15,12 @@ const navItems = [
   { label: 'CV',           id: 'cv'           },
 ] as const;
 
+type NavItemId = (typeof navItems)[number]['id'];
+
 export function Navbar() {
   const navigate = useNavigate();
   const { theme, bgVariant, cycleBgVariant } = useTheme();
-  const [activeId, setActiveId] = useState<string>(navItems[0].id);
+  const [activeId, setActiveId] = useState<NavItemId>(navItems[0].id);
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
@@ -28,7 +30,7 @@ export function Navbar() {
 
     const update = () => {
       const scrollTop = root.scrollTop;
-      let bestId = navItems[0].id;
+      let bestId: NavItemId = navItems[0].id;
       let bestDist = Infinity;
       for (const { id } of navItems) {
         const el = document.getElementById(id);
@@ -62,7 +64,7 @@ export function Navbar() {
     };
   }, [menuOpen]);
 
-  const scrollTo = (id: string) => {
+  const scrollTo = (id: NavItemId) => {
     setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
