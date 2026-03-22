@@ -3,6 +3,7 @@ import portfolio1 from '../assets/images/portfolio1.png';
 import portfolio2 from '../assets/images/portfolio2.png';
 import tokenTracker1 from '../assets/images/token-tracker1.png';
 import tokenTracker2 from '../assets/images/token-tracker2.png';
+import tokenTracker3 from '../assets/images/token-tracker3.png';
 
 export const projects: Project[] = [
   {
@@ -41,7 +42,7 @@ export const projects: Project[] = [
     ],
     detailedOverview:
       'Solves the frustrating lack of token usage visibility in Claude Code subscriptions. The extension injects a live side panel showing output tokens consumed today with a color-coded progress bar, per-session input/output/cache metrics, per-request logs, and a day-by-day history. Built on a local WebSocket + HTTP layer that reads from Claude\'s log files, with auto-detected cap management on first overage.\n\nPlanned to expand into a broader Claude Code toolkit - including usage diagrams and other developer insights.',
-    images: [tokenTracker1, tokenTracker2],
+    images: [tokenTracker1, tokenTracker2, tokenTracker3],
     imageFit: 'contain',
     link: 'https://github.com/nikvujic/simple-claude-token-tracker',
   },

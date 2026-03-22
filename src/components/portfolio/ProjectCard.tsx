@@ -161,7 +161,7 @@ function ImageCarousel({ images, fit = 'cover', onImageClick }: {
         className="flex h-full"
         animate={{ x: `${-current * 100}%` }}
         transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-        style={{ cursor: dragging ? 'grabbing' : 'zoom-in' }}
+        style={{ cursor: dragging ? 'grabbing' : 'pointer' }}
         onPointerDown={(e) => {
           setDragStart(e.clientX);
           setDragging(false);
