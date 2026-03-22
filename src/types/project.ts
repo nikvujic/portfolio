@@ -18,5 +18,6 @@ export type Project = {
   technologies: TechItem[];
   detailedOverview: string;
   images?: string[];
+  imageFit?: 'cover' | 'contain';
   link?: string;
 };
