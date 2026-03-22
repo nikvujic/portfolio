@@ -20,4 +20,5 @@ export type Project = {
   images?: string[];
   imageFit?: 'cover' | 'contain';
   link?: string;
+  defaultExpanded?: boolean;
 };

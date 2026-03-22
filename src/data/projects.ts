@@ -26,6 +26,38 @@ export const projects: Project[] = [
       'Built from scratch as a showcase of frontend craft - featuring a multi-phase animated intro, a theme system with CSS design tokens, snap-scroll section navigation with an active indicator, and a coming AI chat interface trained on my CV. Deployed as a static SPA.',
     images: [portfolio1, portfolio2],
     link: 'https://github.com/nikvujic/portfolio',
+    defaultExpanded: true,
+  },
+  {
+    id: 'ai-chat-sandbox',
+    title: 'AI Chat Sandbox',
+    description:
+      'A minimal chat interface for experimenting with AI models and prompt patterns.',
+    status: 'planned',
+    type: 'sandbox',
+    technologies: [
+      { name: 'React',        category: 'frontend' },
+      { name: 'TypeScript',   category: 'frontend' },
+      { name: 'Claude API',   category: 'backend'  },
+    ],
+    detailedOverview:
+      'A throwaway sandbox for testing Claude API integrations, prompt structures, and simple UI patterns around chat. No fixed scope - just a place to try things.',
+  },
+  {
+    id: 'project-tracker',
+    title: 'Project Tracker',
+    description:
+      'A lightweight personal kanban board for tracking projects, ideas, and ongoing tasks across different stages.',
+    status: 'planned',
+    type: 'productivity',
+    technologies: [
+      { name: 'React',        category: 'frontend' },
+      { name: 'TypeScript',   category: 'frontend' },
+      { name: 'Tailwind CSS', category: 'frontend' },
+      { name: 'Node.js',      category: 'backend'  },
+    ],
+    detailedOverview:
+      'A simple but well-designed tool to manage my own project pipeline - with columns for backlog, in progress, and done. Focused on fast capture and clean UX. Likely synced via a lightweight backend or local-first storage.',
   },
   {
     id: 'claude-token-tracker',
@@ -45,37 +77,7 @@ export const projects: Project[] = [
     images: [tokenTracker1, tokenTracker2, tokenTracker3],
     imageFit: 'contain',
     link: 'https://github.com/nikvujic/simple-claude-token-tracker',
-  },
-  {
-    id: 'project-tracker',
-    title: 'Project Tracker',
-    description:
-      'A lightweight personal kanban board for tracking projects, ideas, and ongoing tasks across different stages.',
-    status: 'planned',
-    type: 'productivity',
-    technologies: [
-      { name: 'React',        category: 'frontend' },
-      { name: 'TypeScript',   category: 'frontend' },
-      { name: 'Tailwind CSS', category: 'frontend' },
-      { name: 'Node.js',      category: 'backend'  },
-    ],
-    detailedOverview:
-      'A simple but well-designed tool to manage my own project pipeline - with columns for backlog, in progress, and done. Focused on fast capture and clean UX. Likely synced via a lightweight backend or local-first storage.',
-  },
-  {
-    id: 'ai-chat-sandbox',
-    title: 'AI Chat Sandbox',
-    description:
-      'A minimal chat interface for experimenting with AI models and prompt patterns.',
-    status: 'planned',
-    type: 'sandbox',
-    technologies: [
-      { name: 'React',        category: 'frontend' },
-      { name: 'TypeScript',   category: 'frontend' },
-      { name: 'Claude API',   category: 'backend'  },
-    ],
-    detailedOverview:
-      'A throwaway sandbox for testing Claude API integrations, prompt structures, and simple UI patterns around chat. No fixed scope - just a place to try things.',
+    defaultExpanded: true,
   },
 
 ];
