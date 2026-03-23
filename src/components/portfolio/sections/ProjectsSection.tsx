@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { ProjectCard } from '../ProjectCard';
 import { projects } from '../../../data/projects';
 
@@ -8,11 +7,6 @@ const fixedCols: [number[], number[]] = [
 ];
 
 export function ProjectsSection() {
-  const [layoutReady, setLayoutReady] = useState(false);
-  useEffect(() => {
-    setLayoutReady(true);
-  }, []);
-
   return (
     <section
       id="projects"
@@ -32,7 +26,7 @@ export function ProjectsSection() {
         {/* Mobile: single column */}
         <div className="mt-8 flex flex-col gap-6 lg:hidden">
           {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} openAfterLayout={layoutReady && !!project.defaultExpanded} />
+            <ProjectCard key={project.id} project={project} openAfterLayout={!!project.defaultExpanded} />
           ))}
         </div>
 
@@ -42,7 +36,7 @@ export function ProjectsSection() {
             <div key={c} className="flex flex-1 flex-col gap-6">
               {indices.map((i) => (
                 <div key={projects[i].id}>
-                  <ProjectCard project={projects[i]} openAfterLayout={layoutReady && !!projects[i].defaultExpanded} />
+                  <ProjectCard project={projects[i]} openAfterLayout={!!projects[i].defaultExpanded} />
                 </div>
               ))}
             </div>

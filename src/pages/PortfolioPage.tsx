@@ -19,7 +19,7 @@ export function PortfolioPage() {
       mainRef.current.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
     }
     window.history.replaceState(null, '');
-  }, []);
+  }, [location.state]);
 
   return (
     <div className="flex h-screen flex-col overflow-hidden">
