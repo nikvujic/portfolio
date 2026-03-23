@@ -2,7 +2,7 @@
 
 Personal portfolio SPA built from scratch. Animated intro, snap-scroll sections, theme system, and a coming AI chat interface trained on my CV.
 
-**Live at:** coming soon...
+**Live at:** https://portfolio.nv-platform.com
 
 ---
 
@@ -39,6 +39,14 @@ Sections: **Profile** - **AI Summary** - **Projects** - **Technologies** - **CV*
 - Project cards with expandable detail, tech tags, and swipeable image carousel
 - Responsive layout with hamburger menu below 900px
 - AI Summary section (coming soon)
+
+---
+
+## Deployment
+
+Hosted on **AWS Amplify** with a custom domain via **Route 53** and managed TLS.
+
+CI/CD runs on GitHub Actions: lint + build on every push to `main`, then triggers an Amplify deployment via webhook.
 
 ---
 

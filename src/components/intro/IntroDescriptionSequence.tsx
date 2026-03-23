@@ -37,7 +37,7 @@ const promptText =
 const summaryText =
   'Frontend-focused engineer building scalable web apps, polished interfaces, and product-minded experiences with Angular and TypeScript, while expanding into React, Node.js, full-stack development, and AI powered features.';
 const mobileInputClass =
-  'min-h-[5.5rem] whitespace-pre-wrap rounded-[0.95rem] px-3 py-0.5 text-left text-sm leading-7 md:px-0 md:py-0 md:text-base';
+  'min-h-[5.5rem] whitespace-pre-wrap rounded-[0.95rem] px-3 py-0.5 text-left text-sm leading-6 md:px-0 md:py-0 md:text-base md:leading-7';
 
 export function IntroDescriptionSequence({
   onComplete,
@@ -63,7 +63,7 @@ export function IntroDescriptionSequence({
       return SHORT_LIST_PAUSE_MS;
     }
 
-    if (count >= 6 && count < 12) {
+    if (count >= 6 && count <= 12) {
       return MEDIUM_LIST_DELAY_MS;
     }
 
