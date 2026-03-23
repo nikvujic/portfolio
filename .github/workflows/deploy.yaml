@@ -32,5 +32,6 @@ jobs:
         run: |
           curl --fail --show-error --silent \
             -X POST \
+            -H "Content-Type: application/json" \
             -d '{}' \
             "${{ secrets.AMPLIFY_WEBHOOK_URL }}"
