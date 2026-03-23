@@ -16,7 +16,7 @@ export function PortfolioPage() {
     if (!section || !mainRef.current) return;
     const el = document.getElementById(section);
     if (el) {
-      mainRef.current.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     window.history.replaceState(null, '');
   }, [location.state]);
