@@ -31,6 +31,24 @@ export const projects: Project[] = [
     defaultExpanded: true,
   },
   {
+    id: 'taskgrid',
+    title: 'Taskgrid',
+    description:
+      'A simple personal kanban board for tracking projects and ideas - with guest-mode local storage and import/export so anyone can use it without an account.',
+    status: 'in-progress',
+    type: 'productivity',
+    technologies: [
+      { name: 'React',        category: 'frontend' },
+      { name: 'TypeScript',   category: 'frontend' },
+      { name: 'Tailwind CSS', category: 'frontend' },
+      { name: 'Node.js',      category: 'backend'  },
+      { name: 'PostgreSQL',   category: 'backend'  },
+      { name: 'AWS',          category: 'devops'   },
+    ],
+    detailedOverview:
+      'A clean, focused kanban for managing my own project pipeline - organized into boards, lists, and cards. Guest users get full functionality via localStorage with import/export support, so no account is needed to use it. Backed by Node.js and PostgreSQL, deployed to AWS.',
+  },
+  {
     id: 'ai-chat-sandbox',
     title: 'AI Chat Sandbox',
     description:
@@ -44,22 +62,6 @@ export const projects: Project[] = [
     ],
     detailedOverview:
       'A throwaway sandbox for testing Claude API integrations, prompt structures, and simple UI patterns around chat. No fixed scope - just a place to try things.',
-  },
-  {
-    id: 'project-tracker',
-    title: 'Project Tracker',
-    description:
-      'A lightweight personal kanban board for tracking projects, ideas, and ongoing tasks across different stages.',
-    status: 'planned',
-    type: 'productivity',
-    technologies: [
-      { name: 'React',        category: 'frontend' },
-      { name: 'TypeScript',   category: 'frontend' },
-      { name: 'Tailwind CSS', category: 'frontend' },
-      { name: 'Node.js',      category: 'backend'  },
-    ],
-    detailedOverview:
-      'A simple but well-designed tool to manage my own project pipeline - with columns for backlog, in progress, and done. Focused on fast capture and clean UX. Likely synced via a lightweight backend or local-first storage.',
   },
   {
     id: 'claude-token-tracker',
