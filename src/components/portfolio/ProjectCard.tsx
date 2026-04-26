@@ -227,7 +227,7 @@ export function ProjectCard({ project, openAfterLayout }: { project: Project; op
     return () => clearTimeout(id);
   }, [openAfterLayout]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const { title, description, status, type, technologies, detailedOverview, images, imageFit, link } = project;
+  const { title, description, status, type, technologies, detailedOverview, images, imageFit, link, liveUrl } = project;
 
   const statusStyle = statusConfig[status] ?? statusConfig['planned'];
 
@@ -291,6 +291,25 @@ export function ProjectCard({ project, openAfterLayout }: { project: Project; op
               transition={{ duration: 0.25, ease: 'easeInOut' }}
               className="overflow-hidden"
             >
+              {/* Live URL */}
+              {liveUrl && (
+                <div className="mt-4 flex flex-wrap items-baseline gap-2 leading-none">
+                  <span className="text-xs font-medium uppercase tracking-widest text-(--text) opacity-40">
+                    Live on
+                  </span>
+                  <a
+                    href={liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-baseline gap-1 text-sm text-(--accent) hover:underline"
+                  >
+                    {liveUrl.replace(/^https?:\/\//, '')}
+                    <ExternalLink size={12} strokeWidth={2} className="self-center" />
+                  </a>
+                </div>
+              )}
+
               {/* Technologies */}
               <div className="mt-5 space-y-4">
                 {groupedTech.map(({ cat, items }) => (

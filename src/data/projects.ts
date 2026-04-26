@@ -1,6 +1,8 @@
 import type { Project } from '../types/project';
 import portfolio1 from '../assets/images/portfolio1.png';
 import portfolio2 from '../assets/images/portfolio2.png';
+import simpleKanban1 from '../assets/images/simple-kanban1.png';
+import simpleKanban2 from '../assets/images/simple-kanban2.png';
 import tokenTracker1 from '../assets/images/token-tracker1.png';
 import tokenTracker2 from '../assets/images/token-tracker2.png';
 import tokenTracker3 from '../assets/images/token-tracker3.png';
@@ -31,37 +33,33 @@ export const projects: Project[] = [
     defaultExpanded: true,
   },
   {
-    id: 'taskgrid',
-    title: 'Taskgrid',
+    id: 'simple-kanban',
+    title: 'Simple Kanban',
     description:
-      'A simple personal kanban board for tracking projects and ideas - with guest-mode local storage and import/export so anyone can use it without an account.',
+      'A minimal personal kanban for tracking projects and ideas - boards, lists, cards, and drag and drop. Works fully offline as a guest, or signed-in with backend persistence.',
     status: 'in-progress',
     type: 'productivity',
     technologies: [
-      { name: 'React',        category: 'frontend' },
-      { name: 'TypeScript',   category: 'frontend' },
-      { name: 'Tailwind CSS', category: 'frontend' },
-      { name: 'Node.js',      category: 'backend'  },
-      { name: 'PostgreSQL',   category: 'backend'  },
-      { name: 'AWS',          category: 'devops'   },
+      { name: 'React',           category: 'frontend' },
+      { name: 'TypeScript',      category: 'frontend' },
+      { name: 'Redux Toolkit',   category: 'frontend' },
+      { name: 'React Router',    category: 'frontend' },
+      { name: '@hello-pangea/dnd', category: 'frontend' },
+      { name: 'Node.js',         category: 'backend'  },
+      { name: 'Express',         category: 'backend'  },
+      { name: 'Prisma',          category: 'backend'  },
+      { name: 'PostgreSQL',      category: 'backend'  },
+      { name: 'JWT',             category: 'backend'  },
+      { name: 'Vite',            category: 'devops'   },
+      { name: 'Docker',          category: 'devops'   },
+      { name: 'AWS Amplify',     category: 'devops'   },
     ],
     detailedOverview:
-      'A clean, focused kanban for managing my own project pipeline - organized into boards, lists, and cards. Guest users get full functionality via localStorage with import/export support, so no account is needed to use it. Backed by Node.js and PostgreSQL, deployed to AWS.',
-  },
-  {
-    id: 'ai-chat-sandbox',
-    title: 'AI Chat Sandbox',
-    description:
-      'A minimal chat interface for experimenting with AI models and prompt patterns.',
-    status: 'planned',
-    type: 'sandbox',
-    technologies: [
-      { name: 'React',        category: 'frontend' },
-      { name: 'TypeScript',   category: 'frontend' },
-      { name: 'Claude API',   category: 'backend'  },
-    ],
-    detailedOverview:
-      'A throwaway sandbox for testing Claude API integrations, prompt structures, and simple UI patterns around chat. No fixed scope - just a place to try things.',
+      'A clean, focused kanban for managing my own project pipeline - organized into boards, lists, and cards with smooth drag-and-drop reordering. Guest mode keeps everything in localStorage with JSON import/export, so the app is fully usable without an account. Signed-in mode persists everything via a REST API with JWT auth.\n\nFrontend is React + Redux Toolkit, deployed to AWS Amplify. Backend is Express + Prisma on PostgreSQL, packaged with Docker Compose for local dev and deployment.',
+    images: [simpleKanban1, simpleKanban2],
+    link: 'https://github.com/nikvujic/simple-kanban',
+    liveUrl: 'https://simple-kanban.nv-platform.com',
+    defaultExpanded: true,
   },
   {
     id: 'claude-token-tracker',
@@ -81,7 +79,6 @@ export const projects: Project[] = [
     images: [tokenTracker1, tokenTracker2, tokenTracker3],
     imageFit: 'contain',
     link: 'https://github.com/nikvujic/simple-claude-token-tracker',
-    defaultExpanded: true,
   },
 
 ];
