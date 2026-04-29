@@ -6,10 +6,15 @@ import { CVSection } from '../components/portfolio/sections/CVSection';
 import { ProfileSection } from '../components/portfolio/sections/ProfileSection';
 import { ProjectsSection } from '../components/portfolio/sections/ProjectsSection';
 import { TechnologiesSection } from '../components/portfolio/sections/TechnologiesSection';
+import { useWheelSnap } from '../hooks/useWheelSnap';
+
+const SECTION_IDS = ['profile', 'ai-summary', 'projects', 'technologies', 'cv'] as const;
 
 export function PortfolioPage() {
   const location = useLocation();
   const mainRef = useRef<HTMLElement>(null);
+
+  useWheelSnap(mainRef, SECTION_IDS);
 
   useEffect(() => {
     const section = (location.state as { section?: string } | null)?.section;

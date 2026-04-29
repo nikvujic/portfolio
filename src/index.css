@@ -135,3 +135,9 @@ code {
   padding: 0.25rem 0.5rem;
   background: var(--code-bg);
 }
+
+@media (hover: hover) and (pointer: fine) {
+  main {
+    scroll-snap-type: none;
+  }
+}
