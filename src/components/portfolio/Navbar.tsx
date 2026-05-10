@@ -85,7 +85,7 @@ export function Navbar() {
             className="h-9 w-9 rounded-full object-cover"
           />
           <span className="text-sm font-semibold tracking-tight text-(--text-h)">
-            Nikola Vujic
+            Nikola Vujić
           </span>
           <div className="flex items-center gap-2 ml-2">
             <a
