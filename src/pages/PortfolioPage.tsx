@@ -18,12 +18,38 @@ export function PortfolioPage() {
 
   useEffect(() => {
     const section = (location.state as { section?: string } | null)?.section;
-    if (!section || !mainRef.current) return;
-    const el = document.getElementById(section);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const root = mainRef.current;
+    if (!section || !root) {
+      window.history.replaceState(null, '');
+      return;
     }
-    window.history.replaceState(null, '');
+    const el = document.getElementById(section);
+    if (!el) {
+      window.history.replaceState(null, '');
+      return;
+    }
+
+    const cTop = root.getBoundingClientRect().top;
+    const targetTop = el.getBoundingClientRect().top - cTop + root.scrollTop;
+    const prevSnap = root.style.scrollSnapType;
+    root.style.scrollSnapType = 'none';
+    root.scrollTo({ top: targetTop, behavior: 'smooth' });
+
+    let restored = false;
+    const restore = () => {
+      if (restored) return;
+      restored = true;
+      root.style.scrollSnapType = prevSnap;
+      root.removeEventListener('scrollend', restore);
+      window.clearTimeout(timeout);
+      window.history.replaceState(null, '');
+    };
+    const timeout = window.setTimeout(restore, 1200);
+    root.addEventListener('scrollend', restore, { once: true });
+
+    return () => {
+      restore();
+    };
   }, [location.state]);
 
   return (
