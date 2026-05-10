@@ -218,14 +218,14 @@ function ImageCarousel({ images, fit = 'cover', onImageClick }: {
 
 // ─── Project card ─────────────────────────────────────────────────────────────
 
-export function ProjectCard({ project, openAfterLayout }: { project: Project; openAfterLayout?: boolean }) {
-  const [expanded, setExpanded] = useState(false);
+export function ProjectCard({ project, openAfterLayout, instantOpen }: { project: Project; openAfterLayout?: boolean; instantOpen?: boolean }) {
+  const [expanded, setExpanded] = useState(!!instantOpen);
 
   useEffect(() => {
-    if (!openAfterLayout) return;
+    if (!openAfterLayout || instantOpen) return;
     const id = setTimeout(() => setExpanded(true), 0);
     return () => clearTimeout(id);
-  }, [openAfterLayout]);
+  }, [openAfterLayout, instantOpen]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const { title, description, status, type, technologies, detailedOverview, images, imageFit, link, liveUrl } = project;
 

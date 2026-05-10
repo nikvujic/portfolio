@@ -33,7 +33,7 @@ const CHIP_DISAPPEAR_DURATION_MS = 0.22;
 const TEXT_AREA_LAYOUT_DURATION_MS = 0.28;
 
 const promptText =
-  'Who is Nikola Vujic?';
+  'Who is Nikola Vujić?';
 const summaryText =
   'Frontend-focused engineer building scalable web apps, polished interfaces, and product-minded experiences with Angular and TypeScript, while expanding into React, Node.js, full-stack development, and AI powered features.';
 const mobileInputClass =

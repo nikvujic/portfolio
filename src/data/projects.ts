@@ -37,7 +37,7 @@ export const projects: Project[] = [
     title: 'Simple Kanban',
     description:
       'A minimal personal kanban for tracking projects and ideas - boards, lists, cards, and drag and drop. Works fully offline as a guest, or signed-in with backend persistence.',
-    status: 'in-progress',
+    status: 'completed',
     type: 'productivity',
     technologies: [
       { name: 'React',           category: 'frontend' },

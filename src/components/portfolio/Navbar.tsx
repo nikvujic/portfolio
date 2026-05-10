@@ -66,7 +66,27 @@ export function Navbar() {
 
   const scrollTo = (id: NavItemId) => {
     setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById(id);
+    const root = document.querySelector('main');
+    if (!el || !root) return;
+
+    const prevSnap = root.style.scrollSnapType;
+    root.style.scrollSnapType = 'none';
+
+    const cTop = root.getBoundingClientRect().top;
+    const targetTop = el.getBoundingClientRect().top - cTop + root.scrollTop;
+    root.scrollTo({ top: targetTop, behavior: 'smooth' });
+
+    let restored = false;
+    const restore = () => {
+      if (restored) return;
+      restored = true;
+      root.style.scrollSnapType = prevSnap;
+      root.removeEventListener('scrollend', restore);
+      window.clearTimeout(timeout);
+    };
+    const timeout = window.setTimeout(restore, 1000);
+    root.addEventListener('scrollend', restore, { once: true });
   };
 
   const replayIntro = () => {
@@ -85,7 +105,7 @@ export function Navbar() {
             className="h-9 w-9 rounded-full object-cover"
           />
           <span className="text-sm font-semibold tracking-tight text-(--text-h)">
-            Nikola Vujic
+            Nikola Vujić
           </span>
           <div className="flex items-center gap-2 ml-2">
             <a

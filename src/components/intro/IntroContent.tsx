@@ -135,7 +135,7 @@ export function IntroContent({ onNavigate, skipAnimation = false }: IntroContent
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...heroTransition, delay: 0.08 }}
           >
-            Nikola Vujic
+            Nikola Vujić
           </motion.h1>
 
           <motion.p

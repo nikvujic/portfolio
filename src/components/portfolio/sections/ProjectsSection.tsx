@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { ProjectCard } from '../ProjectCard';
 import { projects } from '../../../data/projects';
 
@@ -7,6 +8,9 @@ const fixedCols: [number[], number[]] = [
 ];
 
 export function ProjectsSection() {
+  const location = useLocation();
+  const hasSectionTarget = !!(location.state as { section?: string } | null)?.section;
+
   return (
     <section
       id="projects"
@@ -26,7 +30,12 @@ export function ProjectsSection() {
         {/* Mobile: single column */}
         <div className="mt-8 flex flex-col gap-6 lg:hidden">
           {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} openAfterLayout={!!project.defaultExpanded} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              openAfterLayout={!!project.defaultExpanded}
+              instantOpen={hasSectionTarget && !!project.defaultExpanded}
+            />
           ))}
         </div>
 
@@ -36,7 +45,11 @@ export function ProjectsSection() {
             <div key={c} className="flex flex-1 flex-col gap-6">
               {indices.map((i) => (
                 <div key={projects[i].id}>
-                  <ProjectCard project={projects[i]} openAfterLayout={!!projects[i].defaultExpanded} />
+                  <ProjectCard
+                    project={projects[i]}
+                    openAfterLayout={!!projects[i].defaultExpanded}
+                    instantOpen={hasSectionTarget && !!projects[i].defaultExpanded}
+                  />
                 </div>
               ))}
             </div>
