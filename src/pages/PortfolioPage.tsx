@@ -1,65 +1,46 @@
-import { useEffect, useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Navbar } from '../components/portfolio/Navbar';
+import { SideNav } from '../components/portfolio/SideNav';
 import { CVSection } from '../components/portfolio/sections/CVSection';
 import { ProfileSection } from '../components/portfolio/sections/ProfileSection';
 import { ProjectsSection } from '../components/portfolio/sections/ProjectsSection';
 import { TechnologiesSection } from '../components/portfolio/sections/TechnologiesSection';
-import { useWheelSnap } from '../hooks/useWheelSnap';
-
-const SECTION_IDS = ['profile', 'projects', 'technologies', 'cv'] as const;
+import { SECTION_IDS, type SectionId } from '../data/sections';
+import { PAGE_TRANSITION_MS, useSectionPager } from '../hooks/useSectionPager';
 
 export function PortfolioPage() {
   const location = useLocation();
-  const mainRef = useRef<HTMLElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
 
-  useWheelSnap(mainRef, SECTION_IDS);
-
-  useEffect(() => {
+  // Arriving from the intro with a section picked: start there
+  const [initialSection] = useState(() => {
     const section = (location.state as { section?: string } | null)?.section;
-    const root = mainRef.current;
-    if (!section || !root) {
-      window.history.replaceState(null, '');
-      return;
-    }
-    const el = document.getElementById(section);
-    if (!el) {
-      window.history.replaceState(null, '');
-      return;
-    }
+    window.history.replaceState(null, '');
+    return (SECTION_IDS as readonly string[]).includes(section ?? '') ? (section as SectionId) : undefined;
+  });
 
-    const cTop = root.getBoundingClientRect().top;
-    const targetTop = el.getBoundingClientRect().top - cTop + root.scrollTop;
-    const prevSnap = root.style.scrollSnapType;
-    root.style.scrollSnapType = 'none';
-    root.scrollTo({ top: targetTop, behavior: 'smooth' });
-
-    let restored = false;
-    const restore = () => {
-      if (restored) return;
-      restored = true;
-      root.style.scrollSnapType = prevSnap;
-      root.removeEventListener('scrollend', restore);
-      window.clearTimeout(timeout);
-      window.history.replaceState(null, '');
-    };
-    const timeout = window.setTimeout(restore, 1200);
-    root.addEventListener('scrollend', restore, { once: true });
-
-    return () => {
-      restore();
-    };
-  }, [location.state]);
+  const { activeId, index, scrollToSection } = useSectionPager(viewportRef, SECTION_IDS, initialSection);
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
-      <Navbar />
-      <main ref={mainRef} className="flex-1 snap-y snap-mandatory overflow-y-scroll">
-        <ProfileSection />
-        <ProjectsSection />
-        <TechnologiesSection />
-        <CVSection />
-      </main>
+    <div className="flex h-dvh flex-col overflow-hidden">
+      <Navbar activeId={activeId} onNavigate={scrollToSection} />
+      <div ref={viewportRef} className="relative flex-1 overflow-hidden">
+        <SideNav activeId={activeId} onNavigate={scrollToSection} />
+        {/* Each section is one screen tall and scrolls its own content; the stack moves a screen per page */}
+        <main
+          className="h-full will-change-transform motion-reduce:transition-none [&>section]:h-full [&>section]:overflow-y-auto [&>section]:overscroll-contain [&>section]:[scrollbar-width:none] [&>section::-webkit-scrollbar]:hidden"
+          style={{
+            transform: `translate3d(0, ${-index * 100}%, 0)`,
+            transition: `transform ${PAGE_TRANSITION_MS}ms cubic-bezier(0.65, 0, 0.35, 1)`,
+          }}
+        >
+          <ProfileSection />
+          <ProjectsSection />
+          <TechnologiesSection />
+          <CVSection />
+        </main>
+      </div>
     </div>
   );
 }
