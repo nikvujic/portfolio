@@ -1,10 +1,16 @@
 import type { Project } from '../types/project';
-import portfolio1 from '../assets/images/portfolio1.png';
-import portfolio2 from '../assets/images/portfolio2.png';
-import simpleKanban2 from '../assets/images/simple-kanban2.png';
-import tokenTracker1 from '../assets/images/token-tracker1.png';
-import tokenTracker2 from '../assets/images/token-tracker2.png';
-import tokenTracker3 from '../assets/images/token-tracker3.png';
+import portfolio1 from '../assets/images/portfolio1.webp';
+import portfolio2 from '../assets/images/portfolio2.webp';
+import simpleKanban2 from '../assets/images/simple-kanban2.webp';
+import theApp1 from '../assets/images/the-app1.webp';
+import theApp2 from '../assets/images/the-app2.webp';
+import theApp3 from '../assets/images/the-app3.webp';
+import theApp4 from '../assets/images/the-app4.webp';
+import theApp5 from '../assets/images/the-app5.webp';
+import theApp6 from '../assets/images/the-app6.webp';
+import tokenTracker1 from '../assets/images/token-tracker1.webp';
+import tokenTracker2 from '../assets/images/token-tracker2.webp';
+import tokenTracker3 from '../assets/images/token-tracker3.webp';
 
 export const projects: Project[] = [
   {
@@ -35,7 +41,7 @@ export const projects: Project[] = [
     title: 'Simple Kanban',
     description:
       'A minimal personal kanban for tracking projects and ideas - boards, lists, cards, and drag and drop. Works fully offline as a guest, or signed-in with backend persistence.',
-    status: 'completed',
+    status: 'in-progress',
     type: 'productivity',
     technologies: [
       { name: 'React',           category: 'frontend' },
@@ -78,6 +84,29 @@ export const projects: Project[] = [
       'Debt letters are confusing: the same debt gets sold on from the original creditor to a collection agency and then to a debt buyer, each with its own file number and deadlines. The app groups all of that into cases and sorts them by urgency. It is always on the debtor\'s side and gives no legal advice.\n\nVery early stage (working title). So far: product and architecture docs with decision records, a TypeScript monorepo (pnpm + Turborepo), Zod domain schemas, and the skeleton of a rules-based extraction engine with an evaluation CLI to measure how well it reads real letters. Next up is an Expo (React Native) app with a web demo.',
   },
   {
+    id: 'the-app',
+    title: 'The App',
+    description:
+      'A private, offline Android app I use every day - notes, a shopping list, a planner, a medicine tracker and more in one place, replacing several store apps full of ads and sign-ups.',
+    status: 'in-progress',
+    type: 'productivity',
+    technologies: [
+      { name: 'Flutter',          category: 'frontend' },
+      { name: 'Dart',             category: 'frontend' },
+      { name: 'Riverpod',         category: 'frontend' },
+      { name: 'GitHub Actions',   category: 'devops'   },
+      { name: 'Kotlin',           category: 'other'    },
+      { name: 'Android',          category: 'other'    },
+      { name: 'Argon2id',         category: 'other'    },
+      { name: 'AES-256-GCM',      category: 'other'    },
+    ],
+    detailedOverview:
+      'Built for my own phone around three rules: few taps, never lose data, keep it private. Notes, a shopping list and a day planner, plus a Hub of smaller tools - medicine reminders, recipes, a food tracker, subscriptions, packing lists and more. Pip, a small pixel robot, lives in the side menu and reacts to the time of day, the seasons and the weather.\n\nEverything stays on the phone, with optional master-password locking (Argon2id + AES-256-GCM) and plain or encrypted backups. An architecture test enforces the layered structure, and frozen samples of every past file format keep old backups readable - 2,280 tests in total. GitHub Actions runs CI on every push and publishes signed APK releases, about 99 of them since October 2026.',
+    images: [theApp1, theApp2, theApp3, theApp4, theApp5, theApp6],
+    imageFit: 'contain',
+    link: 'https://github.com/nikvujic/mob-util-app',
+  },
+  {
     id: 'claude-token-tracker',
     title: 'Claude Token Tracker',
     description:
@@ -95,6 +124,7 @@ export const projects: Project[] = [
     images: [tokenTracker1, tokenTracker2, tokenTracker3],
     imageFit: 'contain',
     link: 'https://github.com/nikvujic/simple-claude-token-tracker',
+    showAllOnly: true,
   },
 
 ];

@@ -1,15 +1,22 @@
+import { ChevronDown } from 'lucide-react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ProjectCard } from '../ProjectCard';
 import { projects } from '../../../data/projects';
 
-const fixedCols: [number[], number[]] = [
-  projects.map((_, i) => i).filter((_, i) => i % 2 === 0),
-  projects.map((_, i) => i).filter((_, i) => i % 2 === 1),
-];
+const mainProjects = projects.filter((p) => !p.showAllOnly);
+const extraCount = projects.length - mainProjects.length;
 
 export function ProjectsSection() {
   const location = useLocation();
   const hasSectionTarget = !!(location.state as { section?: string } | null)?.section;
+  const [showAll, setShowAll] = useState(false);
+
+  const visible = showAll ? projects : mainProjects;
+  const cols: [number[], number[]] = [
+    visible.map((_, i) => i).filter((i) => i % 2 === 0),
+    visible.map((_, i) => i).filter((i) => i % 2 === 1),
+  ];
 
   return (
     <section
@@ -29,7 +36,7 @@ export function ProjectsSection() {
 
         {/* Mobile: single column */}
         <div className="mt-8 flex flex-col gap-6 lg:hidden">
-          {projects.map((project) => (
+          {visible.map((project) => (
             <ProjectCard
               key={project.id}
               project={project}
@@ -41,20 +48,37 @@ export function ProjectsSection() {
 
         {/* Desktop: two independent columns, balanced by initial height */}
         <div className="mt-8 hidden gap-6 lg:flex">
-          {fixedCols.map((indices, c) => (
+          {cols.map((indices, c) => (
             <div key={c} className="flex flex-1 flex-col gap-6">
               {indices.map((i) => (
-                <div key={projects[i].id}>
+                <div key={visible[i].id}>
                   <ProjectCard
-                    project={projects[i]}
-                    openAfterLayout={!!projects[i].defaultExpanded}
-                    instantOpen={hasSectionTarget && !!projects[i].defaultExpanded}
+                    project={visible[i]}
+                    openAfterLayout={!!visible[i].defaultExpanded}
+                    instantOpen={hasSectionTarget && !!visible[i].defaultExpanded}
                   />
                 </div>
               ))}
             </div>
           ))}
         </div>
+
+        {extraCount > 0 && (
+          <div className="mt-8 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setShowAll((s) => !s)}
+              className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-(--accent-border) bg-(--accent-bg) px-4 py-1.5 text-sm text-(--text-h) transition-opacity hover:opacity-80"
+            >
+              {showAll ? 'Show fewer' : `Show all projects (+${extraCount})`}
+              <ChevronDown
+                size={14}
+                strokeWidth={2}
+                className={`transition-transform duration-200 ${showAll ? 'rotate-180' : ''}`}
+              />
+            </button>
+          </div>
+        )}
       </div>
       <div className="h-[80vh] shrink-0" />
     </section>

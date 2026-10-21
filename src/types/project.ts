@@ -22,4 +22,5 @@ export type Project = {
   link?: string;
   liveUrl?: string;
   defaultExpanded?: boolean;
+  showAllOnly?: boolean;
 };
