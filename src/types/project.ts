@@ -19,6 +19,7 @@ export type Project = {
   detailedOverview: string;
   images?: string[];
   imageFit?: 'cover' | 'contain';
+  imagesPerView?: number;
   link?: string;
   liveUrl?: string;
   defaultExpanded?: boolean;

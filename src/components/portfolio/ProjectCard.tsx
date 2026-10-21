@@ -120,12 +120,16 @@ function Lightbox({ images, initial, fit, onClose }: {
 
 // ─── Image carousel ───────────────────────────────────────────────────────────
 
-function ImageCarousel({ images, fit = 'cover', onImageClick }: {
+function ImageCarousel({ images, fit = 'cover', perView = 1, onImageClick }: {
   images: string[];
   fit?: 'cover' | 'contain';
+  perView?: number;
   onImageClick: (index: number) => void;
 }) {
+  const view = Math.min(perView, images.length);
+  const lastStart = images.length - view;
   const [current, setCurrent]     = useState(0);
+  const pressedIndex = useRef(0);
   const [dragStart, setDragStart] = useState<number | null>(null);
   const [dragging, setDragging]   = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -154,15 +158,17 @@ function ImageCarousel({ images, fit = 'cover', onImageClick }: {
   return (
     <div
       ref={wrapperRef}
-      className="relative mt-5 aspect-video overflow-hidden rounded-xl bg-(--border)/30"
+      className={`relative mt-5 aspect-video overflow-hidden rounded-xl ${view > 1 ? 'bg-(--bg)' : 'bg-(--border)/30'}`}
       onClick={(e) => e.stopPropagation()}
     >
       <motion.div
         className="flex h-full"
-        animate={{ x: `${-current * 100}%` }}
+        animate={{ x: `${(-current * 100) / view}%` }}
         transition={{ type: 'spring', stiffness: 320, damping: 32 }}
         style={{ cursor: dragging ? 'grabbing' : 'pointer' }}
         onPointerDown={(e) => {
+          const index = Number((e.target as HTMLElement).dataset.index);
+          pressedIndex.current = Number.isNaN(index) ? current : index;
           setDragStart(e.clientX);
           setDragging(false);
           e.currentTarget.setPointerCapture(e.pointerId);
@@ -174,8 +180,8 @@ function ImageCarousel({ images, fit = 'cover', onImageClick }: {
           if (dragStart === null) return;
           const delta = e.clientX - dragStart;
           if (Math.abs(delta) < 5) {
-            onImageClick(current);
-          } else if (delta < -50 && current < images.length - 1) {
+            onImageClick(pressedIndex.current);
+          } else if (delta < -50 && current < lastStart) {
             setCurrent((c) => c + 1);
           } else if (delta > 50 && current > 0) {
             setCurrent((c) => c - 1);
@@ -185,20 +191,36 @@ function ImageCarousel({ images, fit = 'cover', onImageClick }: {
         }}
         onPointerCancel={() => { setDragStart(null); setDragging(false); }}
       >
-        {images.map((src, i) => (
+        {images.map((src, i) => view > 1 ? (
+          // Several per view: each image gets its own frame so dark screenshots don't blend into the card
+          <div
+            key={i}
+            style={{ width: `${100 / view}%` }}
+            className="flex h-full shrink-0 items-center justify-center px-1.5 pb-8 pt-3"
+          >
+            <img
+              src={src}
+              alt=""
+              data-index={i}
+              draggable={false}
+              className="h-full w-auto max-w-full select-none rounded-lg border border-(--border) object-contain shadow-lg"
+            />
+          </div>
+        ) : (
           <img
             key={i}
             src={src}
             alt=""
+            data-index={i}
             draggable={false}
             className={`h-full w-full shrink-0 select-none ${fit === 'contain' ? 'object-contain' : 'object-cover object-top'}`}
           />
         ))}
       </motion.div>
 
-      {images.length > 1 && (
+      {lastStart > 0 && (
         <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
-          {images.map((_, i) => (
+          {Array.from({ length: lastStart + 1 }, (_, i) => (
             <button
               key={i}
               type="button"
@@ -227,7 +249,7 @@ export function ProjectCard({ project, openAfterLayout, instantOpen }: { project
     return () => clearTimeout(id);
   }, [openAfterLayout, instantOpen]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const { title, description, status, type, technologies, detailedOverview, images, imageFit, link, liveUrl } = project;
+  const { title, description, status, type, technologies, detailedOverview, images, imageFit, imagesPerView, link, liveUrl } = project;
 
   const statusStyle = statusConfig[status] ?? statusConfig['planned'];
 
@@ -336,6 +358,7 @@ export function ProjectCard({ project, openAfterLayout, instantOpen }: { project
                 <ImageCarousel
                   images={images}
                   fit={imageFit}
+                  perView={imagesPerView}
                   onImageClick={(i) => setLightboxIndex(i)}
                 />
               )}

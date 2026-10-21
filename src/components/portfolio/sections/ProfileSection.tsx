@@ -50,7 +50,8 @@ export function ProfileSection() {
               frontend. Since 2022 I've been working on a large Angular SaaS platform at SquidFlow:
               support ticketing, real-time chat, a query editor, a file manager, admin and
               permission flows, and the less visible work of keeping it up to date across several
-              major Angular versions.
+              major Angular versions. I also prototyped, released and led its companion mobile app
+              in Flutter.
             </p>
             <p>
               Before that I was at Delux, writing software for connected devices - a mobile app for
@@ -65,13 +66,13 @@ export function ProfileSection() {
               code.
             </p>
             <p>
-              What I care about in my work: finishing things rather than starting new ones, code the
-              next person can read, and testing my own work before I call it done.
+              What I care about in my work: finishing things rather than starting new ones, writing code the
+              next person (or agent) can read, and testing my own work before I call it done.
             </p>
           </div>
         </div>
       </div>
-      <div className="h-[80vh] shrink-0 md:hidden" />
+      <div className="h-[80vh] shrink-0" />
     </section>
   );
 }

@@ -104,6 +104,7 @@ export const projects: Project[] = [
       'Built for my own phone around three rules: few taps, never lose data, keep it private. Notes, a shopping list and a day planner, plus a Hub of smaller tools - medicine reminders, recipes, a food tracker, subscriptions, packing lists and more. Pip, a small pixel robot, lives in the side menu and reacts to the time of day, the seasons and the weather.\n\nEverything stays on the phone, with optional master-password locking (Argon2id + AES-256-GCM) and plain or encrypted backups. An architecture test enforces the layered structure, and frozen samples of every past file format keep old backups readable - 2,280 tests in total. GitHub Actions runs CI on every push and publishes signed APK releases, about 99 of them since October 2026.',
     images: [theApp1, theApp2, theApp3, theApp4, theApp5, theApp6],
     imageFit: 'contain',
+    imagesPerView: 3,
     link: 'https://github.com/nikvujic/mob-util-app',
   },
   {
