@@ -35,7 +35,7 @@ const TEXT_AREA_LAYOUT_DURATION_MS = 0.28;
 const promptText =
   'Who is Nikola Vujić?';
 const summaryText =
-  'Frontend-focused engineer building scalable web apps, polished interfaces, and product-minded experiences with Angular and TypeScript, while expanding into React, Node.js, full-stack development, and AI powered features.';
+  'Frontend-leaning full-stack engineer with years of Angular and TypeScript experience in enterprise SaaS, now building and deploying the whole stack - APIs, Docker, CI/CD - and moving into AI-powered features.';
 const mobileInputClass =
   'min-h-[5.5rem] whitespace-pre-wrap rounded-[0.95rem] px-3 py-0.5 text-left text-sm leading-6 md:px-0 md:py-0 md:text-base md:leading-7';
 

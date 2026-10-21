@@ -10,6 +10,8 @@ const IMAGE_REVEAL_DURATION_S = 1.05;
 const POST_SUMMARY_IMAGE_DELAY_MS = 1000;
 const SOCIAL_REVEAL_DELAY_MS = IMAGE_REVEAL_DURATION_S * 1000 + 250;
 const CONTROL_REVEAL_DELAY_MS = 450;
+const SKIP_BUTTON_DELAY_MS = 3000;
+const DESKTOP_QUERY = '(min-width: 900px)';
 
 // ─── Transition presets ───────────────────────────────────────────────────────
 
@@ -33,8 +35,8 @@ const revealTransition = {
 // ─── Nav / link data ──────────────────────────────────────────────────────────
 
 const introNavItems = [
+  { label: 'Profile',      targetId: 'profile'      },
   { label: 'Projects',     targetId: 'projects'     },
-  { label: 'AI Summary',   targetId: 'ai-summary'   },
   { label: 'Technologies', targetId: 'technologies' },
 ] as const;
 
@@ -62,11 +64,19 @@ export function IntroContent({ onNavigate, skipAnimation = false }: IntroContent
   const [showImage,    setShowImage]    = useState(false);
   const [showLinks,    setShowLinks]    = useState(false);
   const [showControls, setShowControls] = useState(false);
+  const [showSkip,     setShowSkip]     = useState(false);
   const [clickCount,   setClickCount]   = useState(0);
   const [skipped,      setSkipped]      = useState(false);
 
   const linksVisible    = showImage && showLinks;
   const controlsVisible = showImage && showControls;
+
+  // Desktop: offer a skip shortly after the intro starts (mobile still needs two taps)
+  useEffect(() => {
+    if (!window.matchMedia(DESKTOP_QUERY).matches) return;
+    const id = window.setTimeout(() => setShowSkip(true), SKIP_BUTTON_DELAY_MS);
+    return () => window.clearTimeout(id);
+  }, []);
 
   // Reveal image after the text sequence finishes
   useEffect(() => {
@@ -106,7 +116,7 @@ export function IntroContent({ onNavigate, skipAnimation = false }: IntroContent
       className="mx-auto w-281.5 max-w-full min-h-svh select-none px-4 pt-10 pb-6 sm:px-5 sm:pt-16 sm:pb-8 md:px-12 md:pt-24 md:pb-10"
       onClick={() => setClickCount((c) => c + 1)}
     >
-      {clickCount >= 2 && !controlsVisible && (
+      {(showSkip || clickCount >= 2) && !controlsVisible && (
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); handleSkip(); }}

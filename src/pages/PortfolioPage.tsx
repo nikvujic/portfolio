@@ -1,14 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Navbar } from '../components/portfolio/Navbar';
-import { AISummarySection } from '../components/portfolio/sections/AISummarySection';
 import { CVSection } from '../components/portfolio/sections/CVSection';
 import { ProfileSection } from '../components/portfolio/sections/ProfileSection';
 import { ProjectsSection } from '../components/portfolio/sections/ProjectsSection';
 import { TechnologiesSection } from '../components/portfolio/sections/TechnologiesSection';
 import { useWheelSnap } from '../hooks/useWheelSnap';
 
-const SECTION_IDS = ['profile', 'ai-summary', 'projects', 'technologies', 'cv'] as const;
+const SECTION_IDS = ['profile', 'projects', 'technologies', 'cv'] as const;
 
 export function PortfolioPage() {
   const location = useLocation();
@@ -57,7 +56,6 @@ export function PortfolioPage() {
       <Navbar />
       <main ref={mainRef} className="flex-1 snap-y snap-mandatory overflow-y-scroll">
         <ProfileSection />
-        <AISummarySection />
         <ProjectsSection />
         <TechnologiesSection />
         <CVSection />
