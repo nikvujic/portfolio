@@ -34,7 +34,6 @@ const revealTransition = {
 
 const introNavItems = [
   { label: 'Projects',     targetId: 'projects'     },
-  { label: 'AI Summary',   targetId: 'ai-summary'   },
   { label: 'Technologies', targetId: 'technologies' },
 ] as const;
 

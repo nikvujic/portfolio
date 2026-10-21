@@ -9,7 +9,6 @@ const INTRO_SEEN_KEY = 'intro-animation-seen';
 
 const navItems = [
   { label: 'Profile',      id: 'profile'      },
-  { label: 'AI Summary',   id: 'ai-summary'   },
   { label: 'Projects',     id: 'projects'     },
   { label: 'Technologies', id: 'technologies' },
   { label: 'CV',           id: 'cv'           },
