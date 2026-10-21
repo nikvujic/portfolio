@@ -33,6 +33,7 @@ const revealTransition = {
 // ─── Nav / link data ──────────────────────────────────────────────────────────
 
 const introNavItems = [
+  { label: 'Profile',      targetId: 'profile'      },
   { label: 'Projects',     targetId: 'projects'     },
   { label: 'Technologies', targetId: 'technologies' },
 ] as const;
