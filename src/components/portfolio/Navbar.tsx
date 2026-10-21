@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { Github, Layers, Linkedin, Menu, X } from 'lucide-react';
+import { Github, Layers, Linkedin, Menu, RotateCcw, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../contexts/useTheme';
@@ -170,8 +170,9 @@ export function Navbar() {
             <button
               type="button"
               onClick={replayIntro}
-              className="cursor-pointer text-xs text-(--text) opacity-40 transition-opacity duration-150 hover:opacity-100"
+              className="flex cursor-pointer items-center gap-1.5 text-xs text-(--text) opacity-75 transition-opacity duration-150 hover:opacity-100"
             >
+              <RotateCcw className="h-3 w-3" strokeWidth={2} />
               Replay intro
             </button>
           </li>
@@ -200,7 +201,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="absolute left-0 right-0 top-full border-t border-(--border) bg-(--bg)/95 backdrop-blur-sm px-5 pb-4 pt-3 min-[900px]:hidden"
+            className="absolute left-0 right-0 top-full border-t border-(--border) bg-(--bg) px-5 pb-4 pt-3 min-[900px]:hidden"
           >
             <ul className="flex flex-col">
               {navItems.map((item) => (
@@ -233,8 +234,9 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => { setMenuOpen(false); replayIntro(); }}
-                className="cursor-pointer text-xs text-(--text) opacity-40 transition-opacity duration-150 hover:opacity-100"
+                className="flex cursor-pointer items-center gap-1.5 text-xs text-(--text) opacity-75 transition-opacity duration-150 hover:opacity-100"
               >
+                <RotateCcw className="h-3 w-3" strokeWidth={2} />
                 Replay intro
               </button>
             </div>
