@@ -30,10 +30,11 @@ const categoryOrder: TechCategory[] = ['frontend', 'backend', 'devops', 'other']
 
 // ─── Lightbox ─────────────────────────────────────────────────────────────────
 
-function Lightbox({ images, initial, fit, onClose }: {
+function Lightbox({ images, initial, fit, dotsBelow, onClose }: {
   images: string[];
   initial: number;
   fit?: 'cover' | 'contain';
+  dotsBelow?: boolean;
   onClose: () => void;
 }) {
   const [current, setCurrent] = useState(initial);
@@ -47,6 +48,25 @@ function Lightbox({ images, initial, fit, onClose }: {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [images.length, onClose]);
+
+  const multiple = images.length > 1;
+  // Outside the image from sm up; on phones there's no room, so they overlay it
+  const arrowClass = 'absolute top-1/2 z-10 -translate-y-1/2 shrink-0 cursor-pointer rounded-full border border-white/20 bg-black/50 p-2 text-white transition-colors hover:bg-black/70 sm:static sm:translate-y-0';
+
+  const dots = (
+    <div className={`flex justify-center gap-1.5 ${dotsBelow ? 'mt-4' : 'absolute bottom-3 left-0 right-0'}`}>
+      {images.map((_, i) => (
+        <button
+          key={i}
+          type="button"
+          onClick={() => setCurrent(i)}
+          className={`h-1.5 rounded-full transition-all duration-200 ${
+            i === current ? 'w-4 bg-white' : 'w-1.5 bg-white/30 hover:bg-white/60'
+          }`}
+        />
+      ))}
+    </div>
+  );
 
   return (
     <motion.div
@@ -70,49 +90,41 @@ function Lightbox({ images, initial, fit, onClose }: {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.92, opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="relative max-h-[90vh] max-w-[90vw]"
+        className="relative flex flex-col items-center"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
-          src={images[current]}
-          alt=""
-          className={`max-h-[90vh] max-w-[90vw] rounded-xl ${fit === 'contain' ? 'object-contain' : 'object-cover'}`}
-        />
+        <div className="relative flex items-center gap-4">
+          {multiple && (
+            <button
+              type="button"
+              onClick={() => setCurrent((c) => c - 1)}
+              className={`${arrowClass} left-3 ${current > 0 ? '' : 'pointer-events-none invisible'}`}
+            >
+              <ChevronLeft size={18} />
+            </button>
+          )}
 
-        {images.length > 1 && (
-          <>
-            {current > 0 && (
-              <button
-                type="button"
-                onClick={() => setCurrent((c) => c - 1)}
-                className="absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer rounded-full border border-white/20 bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
-              >
-                <ChevronLeft size={18} />
-              </button>
-            )}
-            {current < images.length - 1 && (
-              <button
-                type="button"
-                onClick={() => setCurrent((c) => c + 1)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer rounded-full border border-white/20 bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
-              >
-                <ChevronRight size={18} />
-              </button>
-            )}
-            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
-              {images.map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => setCurrent(i)}
-                  className={`h-1.5 rounded-full transition-all duration-200 ${
-                    i === current ? 'w-4 bg-white' : 'w-1.5 bg-white/30 hover:bg-white/60'
-                  }`}
-                />
-              ))}
-            </div>
-          </>
-        )}
+          <div className="relative">
+            <img
+              src={images[current]}
+              alt=""
+              className={`max-w-[90vw] rounded-xl sm:max-w-[calc(90vw-6rem)] ${dotsBelow ? 'max-h-[calc(90vh-2rem)]' : 'max-h-[90vh]'} ${fit === 'contain' ? 'object-contain' : 'object-cover'}`}
+            />
+            {multiple && !dotsBelow && dots}
+          </div>
+
+          {multiple && (
+            <button
+              type="button"
+              onClick={() => setCurrent((c) => c + 1)}
+              className={`${arrowClass} right-3 ${current < images.length - 1 ? '' : 'pointer-events-none invisible'}`}
+            >
+              <ChevronRight size={18} />
+            </button>
+          )}
+        </div>
+
+        {multiple && dotsBelow && dots}
       </motion.div>
     </motion.div>
   );
@@ -389,6 +401,7 @@ export function ProjectCard({ project, openAfterLayout, instantOpen }: { project
             images={images}
             initial={lightboxIndex}
             fit={imageFit}
+            dotsBelow={!!imagesPerView && imagesPerView > 1}
             onClose={() => setLightboxIndex(null)}
           />
         )}
