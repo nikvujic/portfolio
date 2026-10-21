@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ExternalLink, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import type { Project, TechCategory } from '../../types/project';
 
 // ─── Config ───────────────────────────────────────────────────────────────────
@@ -39,6 +40,12 @@ function Lightbox({ images, initial, fit, dotsBelow, onClose }: {
 }) {
   const [current, setCurrent] = useState(initial);
 
+  // The page moves by section (useSectionPager) - pause its keyboard handling while the preview is open
+  useEffect(() => {
+    document.body.dataset.pagerLocked = 'true';
+    return () => { delete document.body.dataset.pagerLocked; };
+  }, []);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -68,7 +75,8 @@ function Lightbox({ images, initial, fit, dotsBelow, onClose }: {
     </div>
   );
 
-  return (
+  // Rendered on <body>: the sections are moved with transforms, which would break position: fixed
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -126,7 +134,8 @@ function Lightbox({ images, initial, fit, dotsBelow, onClose }: {
 
         {multiple && dotsBelow && dots}
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }
 

@@ -4,49 +4,22 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../contexts/useTheme';
 import profileImage from '../../assets/images/profile.jpeg';
+import { SECTION_IDS, SECTION_LABELS, type SectionId } from '../../data/sections';
 
 const INTRO_SEEN_KEY = 'intro-animation-seen';
 
-const navItems = [
-  { label: 'Profile',      id: 'profile'      },
-  { label: 'Projects',     id: 'projects'     },
-  { label: 'Technologies', id: 'technologies' },
-  { label: 'CV',           id: 'cv'           },
-] as const;
+const navItems = SECTION_IDS.map((id) => ({ id, label: SECTION_LABELS[id] }));
 
-type NavItemId = (typeof navItems)[number]['id'];
+type NavbarProps = {
+  activeId: SectionId;
+  onNavigate: (id: SectionId) => void;
+};
 
-export function Navbar() {
+export function Navbar({ activeId, onNavigate }: NavbarProps) {
   const navigate = useNavigate();
   const { theme, bgVariant, cycleBgVariant } = useTheme();
-  const [activeId, setActiveId] = useState<NavItemId>(navItems[0].id);
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const root = document.querySelector('main');
-    if (!root) return;
-
-    const update = () => {
-      const scrollTop = root.scrollTop;
-      let bestId: NavItemId = navItems[0].id;
-      let bestDist = Infinity;
-      for (const { id } of navItems) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const dist = Math.abs(el.offsetTop - scrollTop);
-        if (dist < bestDist) {
-          bestDist = dist;
-          bestId = id;
-        }
-      }
-      setActiveId(bestId);
-    };
-
-    update();
-    root.addEventListener('scroll', update, { passive: true });
-    return () => root.removeEventListener('scroll', update);
-  }, []);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -63,29 +36,9 @@ export function Navbar() {
     };
   }, [menuOpen]);
 
-  const scrollTo = (id: NavItemId) => {
+  const scrollTo = (id: SectionId) => {
     setMenuOpen(false);
-    const el = document.getElementById(id);
-    const root = document.querySelector('main');
-    if (!el || !root) return;
-
-    const prevSnap = root.style.scrollSnapType;
-    root.style.scrollSnapType = 'none';
-
-    const cTop = root.getBoundingClientRect().top;
-    const targetTop = el.getBoundingClientRect().top - cTop + root.scrollTop;
-    root.scrollTo({ top: targetTop, behavior: 'smooth' });
-
-    let restored = false;
-    const restore = () => {
-      if (restored) return;
-      restored = true;
-      root.style.scrollSnapType = prevSnap;
-      root.removeEventListener('scrollend', restore);
-      window.clearTimeout(timeout);
-    };
-    const timeout = window.setTimeout(restore, 1000);
-    root.addEventListener('scrollend', restore, { once: true });
+    onNavigate(id);
   };
 
   const replayIntro = () => {
@@ -94,7 +47,7 @@ export function Navbar() {
   };
 
   return (
-    <header ref={headerRef} data-theme="dark" className="sticky top-0 z-50 border-b border-(--border) bg-(--bg)/90 backdrop-blur-sm">
+    <header ref={headerRef} data-theme="dark" className="relative z-50 shrink-0 border-b border-(--border) bg-(--bg)/90 backdrop-blur-sm">
       <nav className="flex items-center justify-between px-5 py-3 md:px-12">
         {/* Left: profile + name */}
         <div className="flex items-center gap-3">

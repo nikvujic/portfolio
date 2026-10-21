@@ -28,7 +28,7 @@ export function TechnologiesSection() {
   return (
     <section
       id="technologies"
-      className="flex min-h-full snap-start snap-always flex-col justify-start py-6 md:py-10"
+      className="flex flex-col justify-start py-6 md:py-10"
     >
       <div className="mx-auto w-full max-w-281.5 px-5 md:px-12">
         <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-(--accent)">
@@ -85,7 +85,6 @@ export function TechnologiesSection() {
           ))}
         </div>
       </div>
-      <div className="h-[80vh] shrink-0" />
     </section>
   );
 }

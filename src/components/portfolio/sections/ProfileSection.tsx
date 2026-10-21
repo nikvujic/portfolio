@@ -37,7 +37,7 @@ export function ProfileSection() {
   return (
     <section
       id="profile"
-      className="flex min-h-full snap-start snap-always flex-col justify-start py-6 md:py-10"
+      className="flex flex-col justify-start py-6 md:py-10"
     >
       <div className="mx-auto w-full max-w-281.5 px-5 md:px-12">
         <motion.div {...reveal(0)}>
@@ -101,7 +101,6 @@ export function ProfileSection() {
           </div>
         </div>
       </div>
-      <div className="h-[80vh] shrink-0" />
     </section>
   );
 }
