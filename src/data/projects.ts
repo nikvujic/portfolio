@@ -11,7 +11,7 @@ export const projects: Project[] = [
     id: 'portfolio',
     title: 'Portfolio',
     description:
-      'An interactive personal portfolio with an animated intro sequence, AI-powered summary interface, and polished recruiter-facing presentation.',
+      'An interactive personal portfolio with an animated intro sequence, snap-scrolled sections, and a light and dark theme.',
     status: 'in-progress',
     type: 'production',
     technologies: [
@@ -26,10 +26,9 @@ export const projects: Project[] = [
       { name: 'Route 53',        category: 'devops'   },
     ],
     detailedOverview:
-      'Built from scratch as a showcase of frontend craft - featuring a multi-phase animated intro, a theme system with CSS design tokens, snap-scroll section navigation with an active indicator, and a coming AI chat interface trained on my CV.\n\nDeployed to AWS Amplify with a custom domain (portfolio.nv-platform.com) via Route 53 and managed TLS. CI/CD runs on GitHub Actions - lint and build gate every push to main, then trigger an Amplify deployment via webhook.',
+      'Built from scratch as a showcase of frontend craft - featuring a multi-phase animated intro, a theme system with CSS design tokens, snap-scroll section navigation with an active indicator. A planned next step is an AI chat that answers questions about my CV.\n\nDeployed to AWS Amplify with a custom domain (portfolio.nv-platform.com) via Route 53 and managed TLS. CI/CD runs on GitHub Actions - lint and build gate every push to main, then trigger an Amplify deployment via webhook.',
     images: [portfolio1, portfolio2],
     link: 'https://github.com/nikvujic/portfolio',
-    defaultExpanded: true,
   },
   {
     id: 'simple-kanban',
@@ -58,7 +57,25 @@ export const projects: Project[] = [
     images: [simpleKanban2],
     link: 'https://github.com/nikvujic/simple-kanban',
     liveUrl: 'https://simple-kanban.nv-platform.com',
-    defaultExpanded: true,
+  },
+  {
+    id: 'schuldencheck',
+    title: 'Schuldencheck',
+    description:
+      'An app for people in Germany who are in debt - it reads collection and reminder emails, pulls out creditors, amounts and deadlines, and turns them into a clear overview to take to debt counseling.',
+    status: 'in-progress',
+    type: 'production',
+    technologies: [
+      { name: 'TypeScript',  category: 'frontend' },
+      { name: 'TBD',         category: 'frontend' },
+      { name: 'Zod',         category: 'backend'  },
+      { name: 'TBD',         category: 'backend'  },
+      { name: 'pnpm',        category: 'devops'   },
+      { name: 'Turborepo',   category: 'devops'   },
+      { name: 'TBD',         category: 'devops'   },
+    ],
+    detailedOverview:
+      'Debt letters are confusing: the same debt gets sold on from the original creditor to a collection agency and then to a debt buyer, each with its own file number and deadlines. The app groups all of that into cases and sorts them by urgency. It is always on the debtor\'s side and gives no legal advice.\n\nVery early stage (working title). So far: product and architecture docs with decision records, a TypeScript monorepo (pnpm + Turborepo), Zod domain schemas, and the skeleton of a rules-based extraction engine with an evaluation CLI to measure how well it reads real letters. Next up is an Expo (React Native) app with a web demo.',
   },
   {
     id: 'claude-token-tracker',
