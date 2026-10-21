@@ -1,7 +1,6 @@
 import type { Project } from '../types/project';
 import portfolio1 from '../assets/images/portfolio1.png';
 import portfolio2 from '../assets/images/portfolio2.png';
-import simpleKanban1 from '../assets/images/simple-kanban1.png';
 import simpleKanban2 from '../assets/images/simple-kanban2.png';
 import tokenTracker1 from '../assets/images/token-tracker1.png';
 import tokenTracker2 from '../assets/images/token-tracker2.png';
@@ -56,7 +55,7 @@ export const projects: Project[] = [
     ],
     detailedOverview:
       'A clean, focused kanban for managing my own project pipeline - organized into boards, lists, and cards with smooth drag-and-drop reordering. Guest mode keeps everything in localStorage with JSON import/export, so the app is fully usable without an account. Signed-in mode persists everything via a REST API with JWT auth.\n\nFrontend is React + Redux Toolkit, deployed to AWS Amplify. Backend is Express + Prisma on PostgreSQL, packaged with Docker Compose for local dev and deployment.',
-    images: [simpleKanban1, simpleKanban2],
+    images: [simpleKanban2],
     link: 'https://github.com/nikvujic/simple-kanban',
     liveUrl: 'https://simple-kanban.nv-platform.com',
     defaultExpanded: true,
